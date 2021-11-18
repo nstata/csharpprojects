@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BAA2FF9F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FxCurrencyConverterNunitTests", "FxCurrencyConverterTests\NUnit\FxCurrencyConverterNunitTests.csproj", "{CC0B4457-92AF-49B4-9835-C2406A82846E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FxCurrencyConverterIntegrationTests", "FxCurrencyConverterTests\Integration\FxCurrencyConverterIntegrationTests.csproj", "{1F40C1E1-306B-4C21-986B-1717ED1434BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{CC0B4457-92AF-49B4-9835-C2406A82846E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC0B4457-92AF-49B4-9835-C2406A82846E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC0B4457-92AF-49B4-9835-C2406A82846E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F40C1E1-306B-4C21-986B-1717ED1434BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F40C1E1-306B-4C21-986B-1717ED1434BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F40C1E1-306B-4C21-986B-1717ED1434BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F40C1E1-306B-4C21-986B-1717ED1434BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E112856F-8D9C-4727-9ABD-5DCEF47B76A8} = {CA0522C6-9932-45A9-95E7-2254A6B30CDE}
 		{CC0B4457-92AF-49B4-9835-C2406A82846E} = {BAA2FF9F-F481-464E-80A4-A21122513F8D}
+		{1F40C1E1-306B-4C21-986B-1717ED1434BA} = {BAA2FF9F-F481-464E-80A4-A21122513F8D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C85FA21B-D14A-4F5B-A859-A08CB5DD5BE2}
