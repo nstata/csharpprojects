@@ -11,6 +11,7 @@ namespace FxCurrencyConverterNunitTests
         [TestCase("GBP/", true, 100)]
         [TestCase("GBP/GBP", true, 100)]
         [TestCase("XXX/YYY", true, 100)]
+        [TestCase(null, true, 100)]
         public void WhenUsingInvalidCurrencyPairConversionShouldNotSucceed(string inputCurrencyPairs, bool isBuy, decimal amount)
         {
             // init
@@ -27,6 +28,7 @@ namespace FxCurrencyConverterNunitTests
             Assert.AreEqual(null, actualResponse.ConvertedAmountCcy);
             Assert.AreEqual(null, actualResponse.ConvertedAmount);
             Assert.AreEqual(null, actualResponse.PxUsed);
+            
         }
 
         [TestCase("GBP/USD", true, 0)]
@@ -45,7 +47,7 @@ namespace FxCurrencyConverterNunitTests
 
 
             // assert
-            Assert.AreEqual(ConversionEnum.ConversionFailedInvalidCcyPair, actualResponse.ConversionResults);
+            Assert.AreEqual(ConversionEnum.ConversionFailedInvalidAmount, actualResponse.ConversionResults);
             Assert.AreEqual(null, actualResponse.ConvertedAmountCcy);
             Assert.AreEqual(null, actualResponse.ConvertedAmount);
             Assert.AreEqual(null, actualResponse.PxUsed);
@@ -162,10 +164,13 @@ namespace FxCurrencyConverterNunitTests
 
         }
 
-        [TestCase("gbp/usd", false, 100, 134.126, 1.34126)]
-        
-        public void WhenTheInputCurrencyPairIsInAllLowercaseOrAllUppercaseConversionShouldBeSuccessful(string inputCurrencyPairs, bool isBuy,
-            decimal amount, decimal expectedConvertedAmount, decimal expectedPxUsed)
+        [TestCase("gbp/usd", false, 100, "GBP/USD", 134.126, 1.34126)]
+        [TestCase("Gbp/usd", false, 100, "GBP/USD", 134.126, 1.34126)]
+        [TestCase("GBP/Usd", false, 100, "GBP/USD", 134.126, 1.34126)]
+        [TestCase("gbp/USD", false, 100, "GBP/USD", 134.126, 1.34126)]
+
+        public void WhenTheInputCurrencyPairIsInAllLowercaseOrMixedUppercaseLowerCaseConversionShouldBeSuccessful(string inputCurrencyPair, bool isBuy,
+            decimal amount, string expectedCcyPair, decimal expectedConvertedAmount, decimal expectedPxUsed)
         {
             // init
             CurrencyConverterManager currencyConverterManager =
@@ -173,14 +178,14 @@ namespace FxCurrencyConverterNunitTests
 
             // execute / run
             CurrencyConversionResponse actualResponse = currencyConverterManager.
-                GetCurrencyConversionDetails(inputCurrencyPairs, isBuy, amount);
+                GetCurrencyConversionDetails(inputCurrencyPair, isBuy, amount);
 
 
             // assert
             Assert.AreEqual(expectedConvertedAmount, actualResponse.ConvertedAmount);
             Assert.AreEqual(expectedPxUsed, actualResponse.PxUsed);
-            Assert.AreEqual(inputCurrencyPairs, actualResponse.CcyPair);
-            string expectedConvertedAmountCcy = inputCurrencyPairs.Substring(4, 3);
+            Assert.AreEqual(expectedCcyPair, actualResponse.CcyPair);
+            string expectedConvertedAmountCcy = expectedCcyPair.Substring(4, 3);
             Assert.AreEqual(expectedConvertedAmountCcy, actualResponse.ConvertedAmountCcy);            
         }
     }

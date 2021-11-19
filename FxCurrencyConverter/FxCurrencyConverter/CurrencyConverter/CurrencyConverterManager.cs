@@ -44,22 +44,45 @@ namespace FxCurrencyConverter.CurrencyConverter
 
         public CurrencyConversionResponse GetCurrencyConversionDetails(string ccyPair, bool isBuy, decimal amount)
         {
+            if (ccyPair == null)
+            {
+                return new CurrencyConversionResponse
+                {
+                    CcyPair = ccyPair,
+                    Side = isBuy ? Enums.SideEnum.Buy : Enums.SideEnum.Sell,
+                    OriginalAmount = amount,
+                    ConversionResults = Enums.ConversionEnum.ConversionFailedInvalidCcyPair,
+                };
+            }
+
+            ccyPair = ccyPair.ToUpper();
+
             string[] tokens;
             if (ccyPair.Contains("%2F"))
             {
-                tokens = ccyPair.Split("%2F");
+                ccyPair = ccyPair.Replace("%2F", "/");
             }
-            else
-            {
-                tokens = ccyPair.Split("/");
-            }
+
+            tokens = ccyPair.Split("/");
 
             string baseCcy = tokens[0];
             string quotedCcy = tokens[1];
 
+            // checks
+            if (amount <= 0)
+            {
+                return new CurrencyConversionResponse
+                {
+                    CcyPair = ccyPair,
+                    Side = isBuy ? Enums.SideEnum.Buy : Enums.SideEnum.Sell,
+                    OriginalAmount = amount,
+                    ConversionResults = Enums.ConversionEnum.ConversionFailedInvalidAmount,
+                };
+            }
+
+
             // scenario 1: direct conversion exists between baseCcy/quotedCcy
-            string ccyToCheck = GetCcyPair(baseCcy, quotedCcy);
-            CurrencyPriceDetails ccyPriceDetails = _currencyPriceDetails.Find(ccyPrice => ccyPrice.CcyPair == ccyToCheck);
+            CurrencyPriceDetails ccyPriceDetails = _currencyPriceDetails.Find(ccyPrice => ccyPrice.CcyPair == ccyPair);
 
             if (ccyPriceDetails != null)
             {
@@ -77,7 +100,7 @@ namespace FxCurrencyConverter.CurrencyConverter
 
                 return new CurrencyConversionResponse
                 {
-                    CcyPair = ccyToCheck,
+                    CcyPair = ccyPair,
                     Side = isBuy ? Enums.SideEnum.Buy : Enums.SideEnum.Sell,
                     OriginalAmount = amount,
                     OriginalAmountCcy = baseCcy,
@@ -96,10 +119,9 @@ namespace FxCurrencyConverter.CurrencyConverter
             // scenario 3: no currency pair found to convert
             return new CurrencyConversionResponse
             {
-                CcyPair = ccyToCheck,
+                CcyPair = ccyPair,
                 Side = isBuy ? Enums.SideEnum.Buy : Enums.SideEnum.Sell,
                 OriginalAmount = amount,
-                OriginalAmountCcy = baseCcy,
                 ConversionResults = Enums.ConversionEnum.ConversionFailedInvalidCcyPair,
             };
         }

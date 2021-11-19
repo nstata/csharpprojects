@@ -66,6 +66,7 @@ namespace FxCurrencyConverterIntegrationTests.Steps
                 string expectedCcyPair = GetDefaultString(row["CcyPair"]);
                 decimal? expectedOriginalAmount = GetDefaultDecimal(row["OriginalAmount"]);
                 string expectedOriginalAmountCcy = GetDefaultString(row["OriginalAmountCcy"]);
+                SideEnum expectedSide = row["Side"] == "Buy" ? SideEnum.Buy : SideEnum.Sell;
 
                 CurrencyConversionResponse actualResponse = _testStateList.Find(x => x.Id == id).ActualResponse;
 
@@ -76,6 +77,7 @@ namespace FxCurrencyConverterIntegrationTests.Steps
                 Assert.AreEqual(expectedCcyPair, actualResponse.CcyPair);
                 Assert.AreEqual(expectedOriginalAmountCcy, actualResponse.OriginalAmountCcy);
                 Assert.AreEqual(expectedOriginalAmount, actualResponse.OriginalAmount);
+                Assert.AreEqual(expectedSide, actualResponse.Side);
 
             }
         }
