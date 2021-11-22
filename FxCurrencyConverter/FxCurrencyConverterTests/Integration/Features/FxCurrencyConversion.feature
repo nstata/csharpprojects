@@ -54,9 +54,36 @@ Scenario: When the CurrencyPair entered is all lowercase or mix of uppercase and
 
 
 
-
-
 	   
+Scenario: When using a valid Currency pair and Market is Closed, conversion should not succeed
+	Given our input is:
+	| Id | CurrencyPair | Side | Amount |
+	| 1  | AUD/CAD      | Buy  | 100    |
+	| 2  | AUD/CAD      | Sell | 100    |
+	
+	When we run the calculation
+
+	Then the expected results should be
+	| Id | ConversionResult | ConvertedAmountCurrency | ConvertedAmount | PxUsed | CcyPair | OriginalAmount | OriginalAmountCcy | Side |
+	| 1  | MarketClosed     |                         |                 |        | AUD/CAD | 100            |                   | Buy  |
+	| 2  | MarketClosed     |                         |                 |        | AUD/CAD | 100            |                   | Sell |
+
+
+Scenario: When using a valid Currency pair and Market Price is Stale, conversion should not succeed
+	Given our input is:
+	| Id | CurrencyPair | Side | Amount |
+	| 1  | AUD/USD      | Buy  | 100    |
+	| 2  | AUD/USD      | Sell | 100    |
+	
+	When we run the calculation
+
+	Then the expected results should be
+	| Id | ConversionResult | ConvertedAmountCurrency | ConvertedAmount | PxUsed | CcyPair | OriginalAmount | OriginalAmountCcy | Side |
+	| 1  | StalePrice       |                         |                 |        | AUD/USD | 100            |                   | Buy  |
+	| 2  | StalePrice       |                         |                 |        | AUD/USD | 100            |                   | Sell |
+																																  
+
+
 Scenario: When using a valid Currency pair, conversion should succeed.
 	Given our input is:
 	| Id | CurrencyPair | Side | Amount |
@@ -69,4 +96,3 @@ Scenario: When using a valid Currency pair, conversion should succeed.
 	| Id | ConversionResult | ConvertedAmountCurrency | ConvertedAmount | PxUsed  | CcyPair | OriginalAmount | OriginalAmountCcy | Side |
 	| 1  | Successful       | USD                     | 134.272         | 1.34272 | GBP/USD | 100            | GBP               | Buy  |
 	| 2  | Successful       | USD                     | 134.126         | 1.34126 | GBP/USD | 100            | GBP               | Sell |
-																																  

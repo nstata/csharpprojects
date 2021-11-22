@@ -1,5 +1,6 @@
 using FxCurrencyConverter.DataProvider;
-using System.Collections.Generic;
+using FxCurrencyConverter.Enums;
+using System;
 
 namespace FxCurrencyConverter.CurrencyConverter
 {
@@ -51,6 +52,29 @@ namespace FxCurrencyConverter.CurrencyConverter
 
             if (ccyPriceDetails != null)
             {
+                if(ccyPriceDetails.PriceState == MarketPriceStateEnum.MarketClosed)
+                {
+                    return new CurrencyConversionResponse
+                    {
+                        CcyPair = ccyPair,
+                        Side = isBuy ? SideEnum.Buy : SideEnum.Sell,
+                        OriginalAmount = amount,
+                        ConversionResults = ConversionEnum.MarketClosed,
+                    };
+                }
+
+                if ((DateTime.Now - ccyPriceDetails.LastUpdated).TotalMilliseconds > 10)
+                {
+                    return new CurrencyConversionResponse
+                    {
+                        CcyPair = ccyPair,
+                        Side = isBuy ? SideEnum.Buy : SideEnum.Sell,
+                        OriginalAmount = amount,
+                        ConversionResults = ConversionEnum.StalePrice,
+                    };
+                }
+
+
                 decimal pxUsed;
                 if (isBuy)
                 {

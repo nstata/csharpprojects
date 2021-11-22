@@ -19,7 +19,7 @@ namespace FxCurrencyConverterIntegrationTests.Steps
 
         public FxCurrencyConversionSteps()
         {
-            IDataProvider dataProvider = new HardCodedValuesDataProvider();
+            IDataProvider dataProvider = new TestMarketDataProvider();
             _currencyConverterManager = new CurrencyConverterManager(dataProvider);
         }
 
