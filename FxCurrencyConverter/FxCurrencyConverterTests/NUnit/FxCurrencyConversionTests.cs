@@ -1,4 +1,5 @@
 ﻿using FxCurrencyConverter.CurrencyConverter;
+using FxCurrencyConverter.DataProvider;
 using FxCurrencyConverter.Enums;
 using NUnit.Framework;
 
@@ -15,8 +16,11 @@ namespace FxCurrencyConverterNunitTests
         public void WhenUsingInvalidCurrencyPairConversionShouldNotSucceed(string inputCurrencyPairs, bool isBuy, decimal amount)
         {
             // init
+
+            IDataProvider dataProvider = new HardCodedValuesDataProvider();
+            
             CurrencyConverterManager currencyConverterManager =
-                new CurrencyConverterManager();
+                new CurrencyConverterManager(dataProvider);
 
             // execute / run
             CurrencyConversionResponse actualResponse = currencyConverterManager.
@@ -38,8 +42,10 @@ namespace FxCurrencyConverterNunitTests
         public void WhenTheAmountEnteredIsInvalidConversionShouldNotSucceed(string inputCurrencyPairs, bool isBuy, decimal amount)
         {
             // init
+            IDataProvider dataProvider = new HardCodedValuesDataProvider();
+
             CurrencyConverterManager currencyConverterManager =
-                new CurrencyConverterManager();
+                new CurrencyConverterManager(dataProvider);
 
             // execute / run
             CurrencyConversionResponse actualResponse = currencyConverterManager.
@@ -57,8 +63,10 @@ namespace FxCurrencyConverterNunitTests
         public void WhenBuyingAValidCurrencyVerifyThatAskPriceShouldBeUsedToCalculateTheConvertedAmount(string inputCurrencyPairs, bool isBuy, decimal amount, decimal expectedPxUsed)
         {
             // init
+            IDataProvider dataProvider = new HardCodedValuesDataProvider();
+
             CurrencyConverterManager currencyConverterManager =
-                new CurrencyConverterManager();
+                new CurrencyConverterManager(dataProvider);
 
             // execute / run
             CurrencyConversionResponse actualResponse = currencyConverterManager.
@@ -75,8 +83,10 @@ namespace FxCurrencyConverterNunitTests
         public void WhenBuyingAValidCurrencyVerifyThatBuyIsDisplayedInTheResponseBody(string inputCurrencyPairs, bool isBuy, decimal amount)
         {
             // init
+            IDataProvider dataProvider = new HardCodedValuesDataProvider();
+
             CurrencyConverterManager currencyConverterManager =
-                new CurrencyConverterManager();
+                new CurrencyConverterManager(dataProvider);
 
             // execute / run
             CurrencyConversionResponse actualResponse = currencyConverterManager.
@@ -97,8 +107,10 @@ namespace FxCurrencyConverterNunitTests
         public void WhenBuyingAValidCurrencyConvertedAmountShouldBeCorrectlyCalculatedAndDisplayednTheResponseBody(string inputCurrencyPairs, bool isBuy, decimal amount, decimal expectedConvertedAmount)
         {
             // init
+            IDataProvider dataProvider = new HardCodedValuesDataProvider();
+
             CurrencyConverterManager currencyConverterManager =
-                new CurrencyConverterManager();
+                new CurrencyConverterManager(dataProvider);
 
             // execute / run
             CurrencyConversionResponse actualResponse = currencyConverterManager.
@@ -113,8 +125,10 @@ namespace FxCurrencyConverterNunitTests
         public void WhenSellingAValidCurrencyVerifyThatBidPriceShouldBeUsedToCalculateTheConvertedAmount(string inputCurrencyPairs, bool isBuy, decimal amount, decimal expectedPxUsed)
         {
             // init
+            IDataProvider dataProvider = new HardCodedValuesDataProvider();
+
             CurrencyConverterManager currencyConverterManager =
-                new CurrencyConverterManager();
+                new CurrencyConverterManager(dataProvider);
 
             // execute / run
             CurrencyConversionResponse actualResponse = currencyConverterManager.
@@ -130,8 +144,10 @@ namespace FxCurrencyConverterNunitTests
         public void WhenSellingAValidCurrencyVerifyThatSellIsDisplayedInTheResponseBody(string inputCurrencyPairs, bool isBuy, decimal amount)
         {
             // init
+            IDataProvider dataProvider = new HardCodedValuesDataProvider();
+
             CurrencyConverterManager currencyConverterManager =
-                new CurrencyConverterManager();
+                new CurrencyConverterManager(dataProvider);
 
             // execute / run
             CurrencyConversionResponse actualResponse = currencyConverterManager.
@@ -151,8 +167,10 @@ namespace FxCurrencyConverterNunitTests
         public void WhenSellingAValidCurrencyConvertedAmountShouldBeCorrectlyCalculatedAndDisplayednTheResponseBody(string inputCurrencyPairs, bool isBuy, decimal amount, decimal expectedConvertedAmount)
         {
             // init
+            IDataProvider dataProvider = new HardCodedValuesDataProvider();
+
             CurrencyConverterManager currencyConverterManager =
-                new CurrencyConverterManager();
+                new CurrencyConverterManager(dataProvider);
 
             // execute / run
             CurrencyConversionResponse actualResponse = currencyConverterManager.
@@ -173,8 +191,10 @@ namespace FxCurrencyConverterNunitTests
             decimal amount, string expectedCcyPair, decimal expectedConvertedAmount, decimal expectedPxUsed)
         {
             // init
+            IDataProvider dataProvider = new HardCodedValuesDataProvider();
+
             CurrencyConverterManager currencyConverterManager =
-                new CurrencyConverterManager();
+                new CurrencyConverterManager(dataProvider);
 
             // execute / run
             CurrencyConversionResponse actualResponse = currencyConverterManager.

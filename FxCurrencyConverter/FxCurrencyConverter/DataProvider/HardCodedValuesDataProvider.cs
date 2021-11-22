@@ -5,9 +5,11 @@ namespace FxCurrencyConverter.DataProvider
 {
     public class HardCodedValuesDataProvider : IDataProvider
     {
-        public List<CurrencyPriceDetails> GetCurrencyPriceDetails()
+        private List<CurrencyPriceDetails> _currencyPriceDetails;
+
+        public HardCodedValuesDataProvider()
         {
-            return new List<CurrencyPriceDetails>()
+            _currencyPriceDetails = new List<CurrencyPriceDetails>()
             {
                 GetCurrencyPriceDetail("AUD/CAD",0.91946m,0.9207m),
                 GetCurrencyPriceDetail("AUD/USD",0.73273m,0.73334m),
@@ -23,6 +25,10 @@ namespace FxCurrencyConverter.DataProvider
             };
         }
 
+        public CurrencyPriceDetails GetCurrencyPriceDetails(string ccyPair)
+        {
+            return _currencyPriceDetails.Find(x => x.CcyPair == ccyPair);
+        }
 
         private CurrencyPriceDetails GetCurrencyPriceDetail(string ccyPair, decimal bidPx, decimal askPx)
         {

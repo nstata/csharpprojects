@@ -1,4 +1,5 @@
 ﻿using FxCurrencyConverter.CurrencyConverter;
+using FxCurrencyConverter.DataProvider;
 using FxCurrencyConverter.Enums;
 using FxCurrencyConverterIntegrationTests.State;
 using NUnit.Framework;
@@ -12,10 +13,15 @@ namespace FxCurrencyConverterIntegrationTests.Steps
     public class FxCurrencyConversionSteps
 
     {
-        private readonly CurrencyConverterManager _currencyConverterManager =
-       new CurrencyConverterManager();
+        private readonly CurrencyConverterManager _currencyConverterManager;
 
         private readonly List<TestState> _testStateList = new List<TestState>();
+
+        public FxCurrencyConversionSteps()
+        {
+            IDataProvider dataProvider = new HardCodedValuesDataProvider();
+            _currencyConverterManager = new CurrencyConverterManager(dataProvider);
+        }
 
 
         [Given(@"our input is:")]

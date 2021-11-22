@@ -20,13 +20,6 @@ namespace FxCurrencyConverter.Controllers
         }
 
 
-        [HttpGet]
-        public IEnumerable<CurrencyPriceDetails> GetCurrencyPrices()
-        {
-            return _currencyConverterManager.GetCurrencyPrices();
-        }
-
-
         [HttpGet("GetPrice/ccyPair={ccyPair},isBuy={isBuy},amount={amount}")]
         public CurrencyConversionResponse Get(string ccyPair, bool isBuy, decimal amount)
         {
