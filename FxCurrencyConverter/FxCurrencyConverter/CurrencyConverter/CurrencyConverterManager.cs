@@ -44,15 +44,11 @@ namespace FxCurrencyConverter.CurrencyConverter
 
         public CurrencyConversionResponse GetCurrencyConversionDetails(string ccyPair, bool isBuy, decimal amount)
         {
-            if (ccyPair == null)
+            // checks
+            CurrencyConversionResponse invalidData = CheckIfTheInputDataIsInvalid( ccyPair, isBuy, amount);
+            if (invalidData != null)
             {
-                return new CurrencyConversionResponse
-                {
-                    CcyPair = ccyPair,
-                    Side = isBuy ? Enums.SideEnum.Buy : Enums.SideEnum.Sell,
-                    OriginalAmount = amount,
-                    ConversionResults = Enums.ConversionEnum.ConversionFailedInvalidCcyPair,
-                };
+                return invalidData;
             }
 
             ccyPair = ccyPair.ToUpper();
@@ -67,19 +63,6 @@ namespace FxCurrencyConverter.CurrencyConverter
 
             string baseCcy = tokens[0];
             string quotedCcy = tokens[1];
-
-            // checks
-            if (amount <= 0)
-            {
-                return new CurrencyConversionResponse
-                {
-                    CcyPair = ccyPair,
-                    Side = isBuy ? Enums.SideEnum.Buy : Enums.SideEnum.Sell,
-                    OriginalAmount = amount,
-                    ConversionResults = Enums.ConversionEnum.ConversionFailedInvalidAmount,
-                };
-            }
-
 
             // scenario 1: direct conversion exists between baseCcy/quotedCcy
             CurrencyPriceDetails ccyPriceDetails = _currencyPriceDetails.Find(ccyPrice => ccyPrice.CcyPair == ccyPair);
@@ -126,7 +109,32 @@ namespace FxCurrencyConverter.CurrencyConverter
             };
         }
 
+        private CurrencyConversionResponse CheckIfTheInputDataIsInvalid(string ccyPair, bool isBuy, decimal amount)
+        {
+            // checks
+            if (ccyPair == null)
+            {
+                return new CurrencyConversionResponse
+                {
+                    CcyPair = ccyPair,
+                    Side = isBuy ? Enums.SideEnum.Buy : Enums.SideEnum.Sell,
+                    OriginalAmount = amount,
+                    ConversionResults = Enums.ConversionEnum.ConversionFailedInvalidCcyPair,
+                };
+            }
 
-        private string GetCcyPair(string ccy1, string ccy2) => $"{ccy1}/{ccy2}";
+            if (amount <= 0)
+            {
+                return new CurrencyConversionResponse
+                {
+                    CcyPair = ccyPair,
+                    Side = isBuy ? Enums.SideEnum.Buy : Enums.SideEnum.Sell,
+                    OriginalAmount = amount,
+                    ConversionResults = Enums.ConversionEnum.ConversionFailedInvalidAmount,
+                };
+            }
+
+             return null;
+        }
     }
 }
