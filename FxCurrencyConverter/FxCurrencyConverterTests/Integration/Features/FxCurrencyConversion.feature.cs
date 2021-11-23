@@ -558,12 +558,14 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("When using a valid Currency pair, conversion should succeed.", SourceLine=86)]
-        public virtual void WhenUsingAValidCurrencyPairConversionShouldSucceed_()
+        [TechTalk.SpecRun.ScenarioAttribute("When using a valid Currency pair, market is open and price is latest, conversion " +
+            "should succeed.", SourceLine=86)]
+        public virtual void WhenUsingAValidCurrencyPairMarketIsOpenAndPriceIsLatestConversionShouldSucceed_()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When using a valid Currency pair, conversion should succeed.", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When using a valid Currency pair, market is open and price is latest, conversion " +
+                    "should succeed.", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 87
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

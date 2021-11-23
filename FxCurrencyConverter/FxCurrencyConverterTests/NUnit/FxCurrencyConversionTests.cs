@@ -14,8 +14,6 @@ namespace FxCurrencyConverterNunitTests
         [TestCase("GBP/GBP", true, 100)]
         [TestCase("XXX/YYY", true, 100)]
         [TestCase(null, true, 100)]
-       
-            
         public void WhenUsingInvalidCurrencyPairConversionShouldNotSucceed(string inputCurrencyPairs, bool isBuy, decimal amount)
         {
             // init
@@ -37,6 +35,8 @@ namespace FxCurrencyConverterNunitTests
             Assert.AreEqual(null, actualResponse.PxUsed);
             
         }
+
+
 
         [TestCase("GBP/USD", true, 0)]
         [TestCase("GBP/USD", true, -10)]
@@ -61,6 +61,8 @@ namespace FxCurrencyConverterNunitTests
             Assert.AreEqual(null, actualResponse.PxUsed);
         }
 
+
+
         [TestCase("GBP/USD", true, 100, 1.34272)]
         public void WhenBuyingAValidCurrencyVerifyThatAskPriceShouldBeUsedToCalculateTheConvertedAmount(string inputCurrencyPairs, bool isBuy, decimal amount, decimal expectedPxUsed)
         {
@@ -80,6 +82,8 @@ namespace FxCurrencyConverterNunitTests
             Assert.AreEqual(inputCurrencyPairs, actualResponse.CcyPair);
 
         }
+
+
 
         [TestCase("GBP/USD", true, 100)]
         public void WhenBuyingAValidCurrencyVerifyThatBuyIsDisplayedInTheResponseBody(string inputCurrencyPairs, bool isBuy, decimal amount)
@@ -105,6 +109,8 @@ namespace FxCurrencyConverterNunitTests
          
         }
 
+
+
         [TestCase("GBP/USD", true, 100, 134.272)]
         public void WhenBuyingAValidCurrencyConvertedAmountShouldBeCorrectlyCalculatedAndDisplayednTheResponseBody(string inputCurrencyPairs, bool isBuy, decimal amount, decimal expectedConvertedAmount)
         {
@@ -122,6 +128,8 @@ namespace FxCurrencyConverterNunitTests
             Assert.AreEqual(expectedConvertedAmount, actualResponse.ConvertedAmount);
 
         }
+
+
 
         [TestCase("GBP/USD", false, 100, 1.34126)]
         public void WhenSellingAValidCurrencyVerifyThatBidPriceShouldBeUsedToCalculateTheConvertedAmount(string inputCurrencyPairs, bool isBuy, decimal amount, decimal expectedPxUsed)
@@ -141,6 +149,8 @@ namespace FxCurrencyConverterNunitTests
             Assert.AreEqual(expectedPxUsed, actualResponse.PxUsed);   
 
         }
+
+
 
         [TestCase("GBP/USD", false, 100)]
         public void WhenSellingAValidCurrencyVerifyThatSellIsDisplayedInTheResponseBody(string inputCurrencyPairs, bool isBuy, decimal amount)
@@ -165,6 +175,8 @@ namespace FxCurrencyConverterNunitTests
 
         }
 
+
+
         [TestCase("GBP/USD", false, 100, 134.126)]
         public void WhenSellingAValidCurrencyConvertedAmountShouldBeCorrectlyCalculatedAndDisplayednTheResponseBody(string inputCurrencyPairs, bool isBuy, decimal amount, decimal expectedConvertedAmount)
         {
@@ -184,11 +196,12 @@ namespace FxCurrencyConverterNunitTests
 
         }
 
+
+
         [TestCase("gbp/usd", false, 100, "GBP/USD", 134.126, 1.34126)]
         [TestCase("Gbp/usd", false, 100, "GBP/USD", 134.126, 1.34126)]
         [TestCase("GBP/Usd", false, 100, "GBP/USD", 134.126, 1.34126)]
         [TestCase("gbp/USD", false, 100, "GBP/USD", 134.126, 1.34126)]
-
         public void WhenTheInputCurrencyPairIsInAllLowercaseOrMixedUppercaseLowerCaseConversionShouldBeSuccessful(string inputCurrencyPair, bool isBuy,
             decimal amount, string expectedCcyPair, decimal expectedConvertedAmount, decimal expectedPxUsed)
         {
@@ -211,6 +224,8 @@ namespace FxCurrencyConverterNunitTests
             Assert.AreEqual(expectedConvertedAmountCcy, actualResponse.ConvertedAmountCcy);            
         }
 
+
+
         [TestCase("AUD/CAD", true, 10)]
         public void WhenTheCurrencyPairIsValidAndMarketIsClosed(string inputCurrencyPair, bool isBuy,
             decimal amount)
@@ -231,6 +246,8 @@ namespace FxCurrencyConverterNunitTests
             Assert.AreEqual(null, actualResponse.ConvertedAmount);
             Assert.AreEqual(null, actualResponse.PxUsed);
         }
+
+
 
         [TestCase("AUD/USD", true, 10)]
         public void WhenTheCurrencyPairIsValidAndPriceIsStale(string inputCurrencyPair, bool isBuy,

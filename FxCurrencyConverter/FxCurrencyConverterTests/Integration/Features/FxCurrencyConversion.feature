@@ -84,7 +84,7 @@ Scenario: When using a valid Currency pair and Market Price is Stale, conversion
 																																  
 
 
-Scenario: When using a valid Currency pair, conversion should succeed.
+Scenario: When using a valid Currency pair, market is open and price is latest, conversion should succeed.
 	Given our input is:
 	| Id | CurrencyPair | Side | Amount |
 	| 1  | GBP/USD      | Buy  | 100    |

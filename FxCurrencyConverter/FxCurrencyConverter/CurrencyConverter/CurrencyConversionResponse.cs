@@ -1,3 +1,5 @@
+
+
 using FxCurrencyConverter.Enums;
 
 namespace FxCurrencyConverter.CurrencyConverter
