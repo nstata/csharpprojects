@@ -96,35 +96,43 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+#line 6
+ testRunner.Given("the database is clean", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "CurrencyPair",
                             "Side",
-                            "Amount"});
+                            "Amount",
+                            "Guid"});
                 table1.AddRow(new string[] {
                             "1",
                             "GBP/USA",
                             "Buy",
-                            "100"});
+                            "100",
+                            "d03f4ed9-179e-4390-a427-c8cb8142403f"});
                 table1.AddRow(new string[] {
                             "2",
                             "GBP/",
                             "Buy",
-                            "100"});
+                            "100",
+                            "5bf27ab2-3ff1-4760-af7e-c666aff07a93"});
                 table1.AddRow(new string[] {
                             "3",
                             "GBP/GBP",
                             "Buy",
-                            "100"});
+                            "100",
+                            "0f72cc92-ac01-48ab-ad7f-e25d88f8e4c3"});
                 table1.AddRow(new string[] {
                             "4",
                             "XXX/YYY",
                             "Sell",
-                            "100"});
-#line 6
- testRunner.Given("our input is:", ((string)(null)), table1, "Given ");
+                            "100",
+                            "28df2e52-7abf-41c5-8d47-e7155135a9b7"});
+#line 8
+ testRunner.And("our input is:", ((string)(null)), table1, "And ");
 #line hidden
-#line 13
+#line 15
  testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -136,7 +144,8 @@ this.ScenarioInitialize(scenarioInfo);
                             "CcyPair",
                             "OriginalAmount",
                             "OriginalAmountCcy",
-                            "Side"});
+                            "Side",
+                            "Guid"});
                 table2.AddRow(new string[] {
                             "1",
                             "ConversionFailedInvalidCcyPair",
@@ -146,7 +155,8 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/USA",
                             "100",
                             "",
-                            "Buy"});
+                            "Buy",
+                            "d03f4ed9-179e-4390-a427-c8cb8142403f"});
                 table2.AddRow(new string[] {
                             "2",
                             "ConversionFailedInvalidCcyPair",
@@ -156,7 +166,8 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/",
                             "100",
                             "",
-                            "Buy"});
+                            "Buy",
+                            "5bf27ab2-3ff1-4760-af7e-c666aff07a93"});
                 table2.AddRow(new string[] {
                             "3",
                             "ConversionFailedInvalidCcyPair",
@@ -166,7 +177,8 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/GBP",
                             "100",
                             "",
-                            "Buy"});
+                            "Buy",
+                            "0f72cc92-ac01-48ab-ad7f-e25d88f8e4c3"});
                 table2.AddRow(new string[] {
                             "4",
                             "ConversionFailedInvalidCcyPair",
@@ -176,64 +188,12 @@ this.ScenarioInitialize(scenarioInfo);
                             "XXX/YYY",
                             "100",
                             "",
-                            "Sell"});
-#line 15
+                            "Sell",
+                            "28df2e52-7abf-41c5-8d47-e7155135a9b7"});
+#line 17
  testRunner.Then("the expected results should be", ((string)(null)), table2, "Then ");
 #line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("When the amount entered is invalid (zero or negative), conversion should not succ" +
-            "eed.", SourceLine=22)]
-        public virtual void WhenTheAmountEnteredIsInvalidZeroOrNegativeConversionShouldNotSucceed_()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When the amount entered is invalid (zero or negative), conversion should not succ" +
-                    "eed.", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 23
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
-                            "CurrencyPair",
-                            "Side",
-                            "Amount"});
-                table3.AddRow(new string[] {
-                            "1",
-                            "GBP/USD",
-                            "Buy",
-                            "0"});
-                table3.AddRow(new string[] {
-                            "2",
-                            "GBP/USD",
-                            "Buy",
-                            "-10"});
-#line 24
- testRunner.Given("our input is:", ((string)(null)), table3, "Given ");
-#line hidden
-#line 29
- testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "ConversionResult",
                             "ConvertedAmountCurrency",
@@ -242,43 +202,68 @@ this.ScenarioInitialize(scenarioInfo);
                             "CcyPair",
                             "OriginalAmount",
                             "OriginalAmountCcy",
-                            "Side"});
-                table4.AddRow(new string[] {
+                            "Side",
+                            "Guid"});
+                table3.AddRow(new string[] {
                             "1",
-                            "ConversionFailedInvalidAmount",
+                            "ConversionFailedInvalidCcyPair",
                             "",
                             "",
                             "",
-                            "GBP/USD",
-                            "0",
+                            "GBP/USA",
+                            "100",
                             "",
-                            "Buy"});
-                table4.AddRow(new string[] {
+                            "Buy",
+                            "d03f4ed9-179e-4390-a427-c8cb8142403f"});
+                table3.AddRow(new string[] {
                             "2",
-                            "ConversionFailedInvalidAmount",
+                            "ConversionFailedInvalidCcyPair",
                             "",
                             "",
                             "",
-                            "GBP/USD",
-                            "-10",
+                            "GBP/",
+                            "100",
                             "",
-                            "Buy"});
-#line 31
- testRunner.Then("the expected results should be", ((string)(null)), table4, "Then ");
+                            "Buy",
+                            "5bf27ab2-3ff1-4760-af7e-c666aff07a93"});
+                table3.AddRow(new string[] {
+                            "3",
+                            "ConversionFailedInvalidCcyPair",
+                            "",
+                            "",
+                            "",
+                            "GBP/GBP",
+                            "100",
+                            "",
+                            "Buy",
+                            "0f72cc92-ac01-48ab-ad7f-e25d88f8e4c3"});
+                table3.AddRow(new string[] {
+                            "4",
+                            "ConversionFailedInvalidCcyPair",
+                            "",
+                            "",
+                            "",
+                            "XXX/YYY",
+                            "100",
+                            "",
+                            "Sell",
+                            "28df2e52-7abf-41c5-8d47-e7155135a9b7"});
+#line 24
+ testRunner.And("database should store", ((string)(null)), table3, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("When the CurrencyPair entered is all lowercase or mix of uppercase and lowercase," +
-            " conversion should be successful.", SourceLine=36)]
-        public virtual void WhenTheCurrencyPairEnteredIsAllLowercaseOrMixOfUppercaseAndLowercaseConversionShouldBeSuccessful_()
+        [TechTalk.SpecRun.ScenarioAttribute("When the amount entered is invalid (zero or negative), conversion should not succ" +
+            "eed.", SourceLine=33)]
+        public virtual void WhenTheAmountEnteredIsInvalidZeroOrNegativeConversionShouldNotSucceed_()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When the CurrencyPair entered is all lowercase or mix of uppercase and lowercase," +
-                    " conversion should be successful.", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 37
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When the amount entered is invalid (zero or negative), conversion should not succ" +
+                    "eed.", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 34
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -298,36 +283,68 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+#line 35
+    testRunner.Given("the database is clean", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "CurrencyPair",
                             "Side",
-                            "Amount"});
+                            "Amount",
+                            "Guid"});
+                table4.AddRow(new string[] {
+                            "1",
+                            "GBP/USD",
+                            "Buy",
+                            "0",
+                            "9bff6400-3f38-4682-acf9-5b0b75669242"});
+                table4.AddRow(new string[] {
+                            "2",
+                            "GBP/USD",
+                            "Buy",
+                            "-10",
+                            "b46e6efb-5930-4b34-86d1-8011d44efded"});
+#line 37
+ testRunner.And("our input is:", ((string)(null)), table4, "And ");
+#line hidden
+#line 42
+ testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "ConversionResult",
+                            "ConvertedAmountCurrency",
+                            "ConvertedAmount",
+                            "PxUsed",
+                            "CcyPair",
+                            "OriginalAmount",
+                            "OriginalAmountCcy",
+                            "Side",
+                            "Guid"});
                 table5.AddRow(new string[] {
                             "1",
-                            "gbp/usd",
+                            "ConversionFailedInvalidAmount",
+                            "",
+                            "",
+                            "",
+                            "GBP/USD",
+                            "0",
+                            "",
                             "Buy",
-                            "100"});
+                            "9bff6400-3f38-4682-acf9-5b0b75669242"});
                 table5.AddRow(new string[] {
                             "2",
-                            "Gbp/usd",
+                            "ConversionFailedInvalidAmount",
+                            "",
+                            "",
+                            "",
+                            "GBP/USD",
+                            "-10",
+                            "",
                             "Buy",
-                            "100"});
-                table5.AddRow(new string[] {
-                            "3",
-                            "GBP/Usd",
-                            "Buy",
-                            "100"});
-                table5.AddRow(new string[] {
-                            "4",
-                            "gbp/USD",
-                            "Buy",
-                            "100"});
-#line 38
- testRunner.Given("our input is:", ((string)(null)), table5, "Given ");
-#line hidden
-#line 45
- testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                            "b46e6efb-5930-4b34-86d1-8011d44efded"});
+#line 44
+ testRunner.Then("the expected results should be", ((string)(null)), table5, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
@@ -338,63 +355,46 @@ this.ScenarioInitialize(scenarioInfo);
                             "CcyPair",
                             "OriginalAmount",
                             "OriginalAmountCcy",
-                            "Side"});
+                            "Side",
+                            "Guid"});
                 table6.AddRow(new string[] {
                             "1",
-                            "Successful",
-                            "USD",
-                            "134.272",
-                            "1.34272",
+                            "ConversionFailedInvalidAmount",
+                            "",
+                            "",
+                            "",
                             "GBP/USD",
-                            "100",
-                            "GBP",
-                            "Buy"});
+                            "0",
+                            "",
+                            "Buy",
+                            "9bff6400-3f38-4682-acf9-5b0b75669242"});
                 table6.AddRow(new string[] {
                             "2",
-                            "Successful",
-                            "USD",
-                            "134.272",
-                            "1.34272",
+                            "ConversionFailedInvalidAmount",
+                            "",
+                            "",
+                            "",
                             "GBP/USD",
-                            "100",
-                            "GBP",
-                            "Buy"});
-                table6.AddRow(new string[] {
-                            "3",
-                            "Successful",
-                            "USD",
-                            "134.272",
-                            "1.34272",
-                            "GBP/USD",
-                            "100",
-                            "GBP",
-                            "Buy"});
-                table6.AddRow(new string[] {
-                            "4",
-                            "Successful",
-                            "USD",
-                            "134.272",
-                            "1.34272",
-                            "GBP/USD",
-                            "100",
-                            "GBP",
-                            "Buy"});
-#line 47
- testRunner.Then("the expected results should be", ((string)(null)), table6, "Then ");
+                            "-10",
+                            "",
+                            "Buy",
+                            "b46e6efb-5930-4b34-86d1-8011d44efded"});
+#line 49
+ testRunner.And("database should store", ((string)(null)), table6, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("When using a valid Currency pair and Market is Closed, conversion should not succ" +
-            "eed", SourceLine=57)]
-        public virtual void WhenUsingAValidCurrencyPairAndMarketIsClosedConversionShouldNotSucceed()
+        [TechTalk.SpecRun.ScenarioAttribute("When the CurrencyPair entered is all lowercase or mix of uppercase and lowercase," +
+            " conversion should be successful.", SourceLine=55)]
+        public virtual void WhenTheCurrencyPairEnteredIsAllLowercaseOrMixOfUppercaseAndLowercaseConversionShouldBeSuccessful_()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When using a valid Currency pair and Market is Closed, conversion should not succ" +
-                    "eed", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 58
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When the CurrencyPair entered is all lowercase or mix of uppercase and lowercase," +
+                    " conversion should be successful.", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 56
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -414,25 +414,43 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+#line 57
+ testRunner.Given("the database is clean", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
                 TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "CurrencyPair",
                             "Side",
-                            "Amount"});
+                            "Amount",
+                            "Guid"});
                 table7.AddRow(new string[] {
                             "1",
-                            "AUD/CAD",
+                            "gbp/usd",
                             "Buy",
-                            "100"});
+                            "100",
+                            "1dc4fa42-2b2f-4a32-9aa4-0920fe257f04"});
                 table7.AddRow(new string[] {
                             "2",
-                            "AUD/CAD",
-                            "Sell",
-                            "100"});
+                            "Gbp/usd",
+                            "Buy",
+                            "100",
+                            "fa76ed90-4e88-4c59-88b4-cddc315185f1"});
+                table7.AddRow(new string[] {
+                            "3",
+                            "GBP/Usd",
+                            "Buy",
+                            "100",
+                            "216ed28e-3b3f-41e5-a4f1-9e3bba3afa1d"});
+                table7.AddRow(new string[] {
+                            "4",
+                            "gbp/USD",
+                            "Buy",
+                            "100",
+                            "c42bd0bb-ca71-49bb-be0c-a2d316c89399"});
 #line 59
- testRunner.Given("our input is:", ((string)(null)), table7, "Given ");
+ testRunner.And("our input is:", ((string)(null)), table7, "And ");
 #line hidden
-#line 64
+#line 66
  testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -444,84 +462,56 @@ this.ScenarioInitialize(scenarioInfo);
                             "CcyPair",
                             "OriginalAmount",
                             "OriginalAmountCcy",
-                            "Side"});
+                            "Side",
+                            "Guid"});
                 table8.AddRow(new string[] {
                             "1",
-                            "MarketClosed",
-                            "",
-                            "",
-                            "",
-                            "AUD/CAD",
+                            "Successful",
+                            "USD",
+                            "134.272",
+                            "1.34272",
+                            "GBP/USD",
                             "100",
-                            "",
-                            "Buy"});
+                            "GBP",
+                            "Buy",
+                            "1dc4fa42-2b2f-4a32-9aa4-0920fe257f04"});
                 table8.AddRow(new string[] {
                             "2",
-                            "MarketClosed",
-                            "",
-                            "",
-                            "",
-                            "AUD/CAD",
+                            "Successful",
+                            "USD",
+                            "134.272",
+                            "1.34272",
+                            "GBP/USD",
                             "100",
-                            "",
-                            "Sell"});
-#line 66
+                            "GBP",
+                            "Buy",
+                            "fa76ed90-4e88-4c59-88b4-cddc315185f1"});
+                table8.AddRow(new string[] {
+                            "3",
+                            "Successful",
+                            "USD",
+                            "134.272",
+                            "1.34272",
+                            "GBP/USD",
+                            "100",
+                            "GBP",
+                            "Buy",
+                            "216ed28e-3b3f-41e5-a4f1-9e3bba3afa1d"});
+                table8.AddRow(new string[] {
+                            "4",
+                            "Successful",
+                            "USD",
+                            "134.272",
+                            "1.34272",
+                            "GBP/USD",
+                            "100",
+                            "GBP",
+                            "Buy",
+                            "c42bd0bb-ca71-49bb-be0c-a2d316c89399"});
+#line 68
  testRunner.Then("the expected results should be", ((string)(null)), table8, "Then ");
 #line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [TechTalk.SpecRun.ScenarioAttribute("When using a valid Currency pair and Market Price is Stale, conversion should not" +
-            " succeed", SourceLine=71)]
-        public virtual void WhenUsingAValidCurrencyPairAndMarketPriceIsStaleConversionShouldNotSucceed()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When using a valid Currency pair and Market Price is Stale, conversion should not" +
-                    " succeed", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 72
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
                 TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Id",
-                            "CurrencyPair",
-                            "Side",
-                            "Amount"});
-                table9.AddRow(new string[] {
-                            "1",
-                            "AUD/USD",
-                            "Buy",
-                            "100"});
-                table9.AddRow(new string[] {
-                            "2",
-                            "AUD/USD",
-                            "Sell",
-                            "100"});
-#line 73
- testRunner.Given("our input is:", ((string)(null)), table9, "Given ");
-#line hidden
-#line 78
- testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "ConversionResult",
                             "ConvertedAmountCurrency",
@@ -530,43 +520,68 @@ this.ScenarioInitialize(scenarioInfo);
                             "CcyPair",
                             "OriginalAmount",
                             "OriginalAmountCcy",
-                            "Side"});
-                table10.AddRow(new string[] {
+                            "Side",
+                            "Guid"});
+                table9.AddRow(new string[] {
                             "1",
-                            "StalePrice",
-                            "",
-                            "",
-                            "",
-                            "AUD/USD",
+                            "Successful",
+                            "USD",
+                            "134.272",
+                            "1.34272",
+                            "GBP/USD",
                             "100",
-                            "",
-                            "Buy"});
-                table10.AddRow(new string[] {
+                            "GBP",
+                            "Buy",
+                            "1dc4fa42-2b2f-4a32-9aa4-0920fe257f04"});
+                table9.AddRow(new string[] {
                             "2",
-                            "StalePrice",
-                            "",
-                            "",
-                            "",
-                            "AUD/USD",
+                            "Successful",
+                            "USD",
+                            "134.272",
+                            "1.34272",
+                            "GBP/USD",
                             "100",
-                            "",
-                            "Sell"});
-#line 80
- testRunner.Then("the expected results should be", ((string)(null)), table10, "Then ");
+                            "GBP",
+                            "Buy",
+                            "fa76ed90-4e88-4c59-88b4-cddc315185f1"});
+                table9.AddRow(new string[] {
+                            "3",
+                            "Successful",
+                            "USD",
+                            "134.272",
+                            "1.34272",
+                            "GBP/USD",
+                            "100",
+                            "GBP",
+                            "Buy",
+                            "216ed28e-3b3f-41e5-a4f1-9e3bba3afa1d"});
+                table9.AddRow(new string[] {
+                            "4",
+                            "Successful",
+                            "USD",
+                            "134.272",
+                            "1.34272",
+                            "GBP/USD",
+                            "100",
+                            "GBP",
+                            "Buy",
+                            "c42bd0bb-ca71-49bb-be0c-a2d316c89399"});
+#line 75
+ testRunner.And("database should store", ((string)(null)), table9, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("When using a valid Currency pair, market is open and price is latest, conversion " +
-            "should succeed.", SourceLine=86)]
-        public virtual void WhenUsingAValidCurrencyPairMarketIsOpenAndPriceIsLatestConversionShouldSucceed_()
+        [TechTalk.SpecRun.ScenarioAttribute("When using a valid Currency pair and Market is Closed, conversion should not succ" +
+            "eed", SourceLine=85)]
+        public virtual void WhenUsingAValidCurrencyPairAndMarketIsClosedConversionShouldNotSucceed()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When using a valid Currency pair, market is open and price is latest, conversion " +
-                    "should succeed.", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 87
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When using a valid Currency pair and Market is Closed, conversion should not succ" +
+                    "eed", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 86
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -586,26 +601,68 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+#line 87
+ testRunner.Given("the database is clean", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "CurrencyPair",
                             "Side",
-                            "Amount"});
+                            "Amount",
+                            "Guid"});
+                table10.AddRow(new string[] {
+                            "1",
+                            "AUD/CAD",
+                            "Buy",
+                            "100",
+                            "07e80dc3-3141-4a9b-86da-66bb0f67643c"});
+                table10.AddRow(new string[] {
+                            "2",
+                            "AUD/CAD",
+                            "Sell",
+                            "100",
+                            "b2fe2d55-464a-4973-a02f-2cc66c6cbdcf"});
+#line 89
+ testRunner.And("our input is:", ((string)(null)), table10, "And ");
+#line hidden
+#line 94
+ testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "ConversionResult",
+                            "ConvertedAmountCurrency",
+                            "ConvertedAmount",
+                            "PxUsed",
+                            "CcyPair",
+                            "OriginalAmount",
+                            "OriginalAmountCcy",
+                            "Side",
+                            "Guid"});
                 table11.AddRow(new string[] {
                             "1",
-                            "GBP/USD",
+                            "MarketClosed",
+                            "",
+                            "",
+                            "",
+                            "AUD/CAD",
+                            "100",
+                            "",
                             "Buy",
-                            "100"});
+                            "07e80dc3-3141-4a9b-86da-66bb0f67643c"});
                 table11.AddRow(new string[] {
                             "2",
-                            "GBP/USD",
+                            "MarketClosed",
+                            "",
+                            "",
+                            "",
+                            "AUD/CAD",
+                            "100",
+                            "",
                             "Sell",
-                            "100"});
-#line 88
- testRunner.Given("our input is:", ((string)(null)), table11, "Given ");
-#line hidden
-#line 93
- testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+                            "b2fe2d55-464a-4973-a02f-2cc66c6cbdcf"});
+#line 96
+ testRunner.Then("the expected results should be", ((string)(null)), table11, "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
@@ -616,8 +673,235 @@ this.ScenarioInitialize(scenarioInfo);
                             "CcyPair",
                             "OriginalAmount",
                             "OriginalAmountCcy",
-                            "Side"});
+                            "Side",
+                            "Guid"});
                 table12.AddRow(new string[] {
+                            "1",
+                            "MarketClosed",
+                            "",
+                            "",
+                            "",
+                            "AUD/CAD",
+                            "100",
+                            "",
+                            "Buy",
+                            "07e80dc3-3141-4a9b-86da-66bb0f67643c"});
+                table12.AddRow(new string[] {
+                            "2",
+                            "MarketClosed",
+                            "",
+                            "",
+                            "",
+                            "AUD/CAD",
+                            "100",
+                            "",
+                            "Sell",
+                            "b2fe2d55-464a-4973-a02f-2cc66c6cbdcf"});
+#line 102
+ testRunner.And("database should store", ((string)(null)), table12, "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("When using a valid Currency pair and Market Price is Stale, conversion should not" +
+            " succeed", SourceLine=107)]
+        public virtual void WhenUsingAValidCurrencyPairAndMarketPriceIsStaleConversionShouldNotSucceed()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When using a valid Currency pair and Market Price is Stale, conversion should not" +
+                    " succeed", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 108
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 109
+ testRunner.Given("the database is clean", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "CurrencyPair",
+                            "Side",
+                            "Amount",
+                            "Guid"});
+                table13.AddRow(new string[] {
+                            "1",
+                            "AUD/USD",
+                            "Buy",
+                            "100",
+                            "4e10981c-7aa5-4dff-b22c-98609861d2a5"});
+                table13.AddRow(new string[] {
+                            "2",
+                            "AUD/USD",
+                            "Sell",
+                            "100",
+                            "b048af59-3428-4db1-bb00-0a1d3c139406"});
+#line 111
+ testRunner.And("our input is:", ((string)(null)), table13, "And ");
+#line hidden
+#line 116
+ testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "ConversionResult",
+                            "ConvertedAmountCurrency",
+                            "ConvertedAmount",
+                            "PxUsed",
+                            "CcyPair",
+                            "OriginalAmount",
+                            "OriginalAmountCcy",
+                            "Side",
+                            "Guid"});
+                table14.AddRow(new string[] {
+                            "1",
+                            "StalePrice",
+                            "",
+                            "",
+                            "",
+                            "AUD/USD",
+                            "100",
+                            "",
+                            "Buy",
+                            "4e10981c-7aa5-4dff-b22c-98609861d2a5"});
+                table14.AddRow(new string[] {
+                            "2",
+                            "StalePrice",
+                            "",
+                            "",
+                            "",
+                            "AUD/USD",
+                            "100",
+                            "",
+                            "Sell",
+                            "b048af59-3428-4db1-bb00-0a1d3c139406"});
+#line 118
+ testRunner.Then("the expected results should be", ((string)(null)), table14, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "ConversionResult",
+                            "ConvertedAmountCurrency",
+                            "ConvertedAmount",
+                            "PxUsed",
+                            "CcyPair",
+                            "OriginalAmount",
+                            "OriginalAmountCcy",
+                            "Side",
+                            "Guid"});
+                table15.AddRow(new string[] {
+                            "1",
+                            "StalePrice",
+                            "",
+                            "",
+                            "",
+                            "AUD/USD",
+                            "100",
+                            "",
+                            "Buy",
+                            "4e10981c-7aa5-4dff-b22c-98609861d2a5"});
+                table15.AddRow(new string[] {
+                            "2",
+                            "StalePrice",
+                            "",
+                            "",
+                            "",
+                            "AUD/USD",
+                            "100",
+                            "",
+                            "Sell",
+                            "b048af59-3428-4db1-bb00-0a1d3c139406"});
+#line 124
+ testRunner.And("database should store", ((string)(null)), table15, "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("When using a valid Currency pair, market is open and price is latest, conversion " +
+            "should succeed.", SourceLine=129)]
+        public virtual void WhenUsingAValidCurrencyPairMarketIsOpenAndPriceIsLatestConversionShouldSucceed_()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When using a valid Currency pair, market is open and price is latest, conversion " +
+                    "should succeed.", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 130
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 131
+ testRunner.Given("the database is clean", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "CurrencyPair",
+                            "Side",
+                            "Amount",
+                            "Guid"});
+                table16.AddRow(new string[] {
+                            "1",
+                            "GBP/USD",
+                            "Buy",
+                            "100",
+                            "69233754-a113-4355-a1b0-4026bbbf635a"});
+                table16.AddRow(new string[] {
+                            "2",
+                            "GBP/USD",
+                            "Sell",
+                            "100",
+                            "9df429e9-5d73-4330-9f14-72908db4a13a"});
+#line 133
+ testRunner.And("our input is:", ((string)(null)), table16, "And ");
+#line hidden
+#line 138
+ testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "ConversionResult",
+                            "ConvertedAmountCurrency",
+                            "ConvertedAmount",
+                            "PxUsed",
+                            "CcyPair",
+                            "OriginalAmount",
+                            "OriginalAmountCcy",
+                            "Side",
+                            "Guid"});
+                table17.AddRow(new string[] {
                             "1",
                             "Successful",
                             "USD",
@@ -626,8 +910,9 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/USD",
                             "100",
                             "GBP",
-                            "Buy"});
-                table12.AddRow(new string[] {
+                            "Buy",
+                            "69233754-a113-4355-a1b0-4026bbbf635a"});
+                table17.AddRow(new string[] {
                             "2",
                             "Successful",
                             "USD",
@@ -636,9 +921,46 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/USD",
                             "100",
                             "GBP",
-                            "Sell"});
-#line 95
- testRunner.Then("the expected results should be", ((string)(null)), table12, "Then ");
+                            "Sell",
+                            "9df429e9-5d73-4330-9f14-72908db4a13a"});
+#line 140
+ testRunner.Then("the expected results should be", ((string)(null)), table17, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "ConversionResult",
+                            "ConvertedAmountCurrency",
+                            "ConvertedAmount",
+                            "PxUsed",
+                            "CcyPair",
+                            "OriginalAmount",
+                            "OriginalAmountCcy",
+                            "Side",
+                            "Guid"});
+                table18.AddRow(new string[] {
+                            "1",
+                            "Successful",
+                            "USD",
+                            "134.272",
+                            "1.34272",
+                            "GBP/USD",
+                            "100",
+                            "GBP",
+                            "Buy",
+                            "69233754-a113-4355-a1b0-4026bbbf635a"});
+                table18.AddRow(new string[] {
+                            "2",
+                            "Successful",
+                            "USD",
+                            "134.126",
+                            "1.34126",
+                            "GBP/USD",
+                            "100",
+                            "GBP",
+                            "Sell",
+                            "9df429e9-5d73-4330-9f14-72908db4a13a"});
+#line 146
+ testRunner.And("database should store", ((string)(null)), table18, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

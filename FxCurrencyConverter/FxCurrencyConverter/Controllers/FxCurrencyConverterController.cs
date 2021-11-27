@@ -1,6 +1,7 @@
 ﻿using FxCurrencyConverter.CurrencyConverter;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 
 namespace FxCurrencyConverter.Controllers
@@ -20,8 +21,8 @@ namespace FxCurrencyConverter.Controllers
         }
 
 
-        [HttpGet("GetPrice/ccyPair={ccyPair},isBuy={isBuy},amount={amount}")]
-        public CurrencyConversionResponse Get(string ccyPair, bool isBuy, decimal amount)
+        [HttpGet("GetPrice/ccyPair={ccyPair},isBuy={isBuy},amount={amount},id={id}")]
+        public CurrencyConversionResponse Get(string ccyPair, bool isBuy, decimal amount, Guid id)
         {
             // When you buy a currency pair from a forex broker, you buy the base currency and sell the quote currency.
             // Conversely, when you sell the currency pair, you sell the base currency and receive the quote currency.
@@ -29,7 +30,7 @@ namespace FxCurrencyConverter.Controllers
             // The bid price is the price that the forex broker will buy the base currency from you in exchange for the quote or counter currency.
             // The ask—also called the offer—is the price that the broker will sell you the base currency in exchange for the quote or counter currency.
 
-            return _currencyConverterManager.GetCurrencyConversionDetails(ccyPair, isBuy, amount);
+            return _currencyConverterManager.GetCurrencyConversionDetails(ccyPair, isBuy, amount, id);
         }
     }
 }

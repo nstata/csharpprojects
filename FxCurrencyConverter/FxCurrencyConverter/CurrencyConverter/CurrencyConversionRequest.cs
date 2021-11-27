@@ -1,5 +1,6 @@
 using FxCurrencyConverter.Enums;
 
+
 namespace FxCurrencyConverter.CurrencyConverter
 {
     public class CurrencyConversionRequest
@@ -9,5 +10,13 @@ namespace FxCurrencyConverter.CurrencyConverter
         public SideEnum Side { get; init; }
 
         public decimal OriginalAmount { get; init; }
+
+        public int SideId
+        {
+            get
+            {
+                return (int)Side;
+            }
+        }
     }
 }

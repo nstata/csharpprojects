@@ -1,5 +1,6 @@
 using FxCurrencyConverter.CurrencyConverter;
 using FxCurrencyConverter.DataProvider;
+using FxCurrencyConverter.DB;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,7 @@ namespace FxCurrencyConverter
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddSingleton<IDataProvider, HardCodedValuesDataProvider>();
+            services.AddSingleton<ITradeRepositoryDb, TradeRepositoryDb>();
             services.AddSingleton<CurrencyConverterManager>();
 
             services.AddControllers();

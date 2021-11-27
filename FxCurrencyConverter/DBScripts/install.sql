@@ -24,14 +24,14 @@ CONSTRAINT PK_ConversionResults PRIMARY KEY (ID)
 CREATE TABLE FxCurrencyConversionAudit
 (
 ID uniqueidentifier NOT NULL,
-CurrencyPair nvarchar(7) NOT NULL,
+CcyPair nvarchar(7) NOT NULL,
 SideId int NOT NULL FOREIGN KEY REFERENCES Side(ID),
-OriginalAmount DECIMAL(11, 4) NOT NULL,
-ConversionResultId int NOT NULL FOREIGN KEY REFERENCES ConversionResults(ID),
-ConvertedAmountCurrency nvarchar(3) NULL,
-ConvertedAmount DECIMAL(11, 4) NULL,
-PxUsed DECIMAL(11, 4) NULL,
-OriginalAmountCurrency nvarchar(3) NULL,
+OriginalAmount DECIMAL(18, 8) NOT NULL,
+ConversionResultsId int NOT NULL FOREIGN KEY REFERENCES ConversionResults(ID),
+ConvertedAmountCcy nvarchar(3) NULL,
+ConvertedAmount DECIMAL(18, 8) NULL,
+PxUsed DECIMAL(18, 8) NULL,
+OriginalAmountCcy nvarchar(3) NULL,
 LastUpdated datetime,
 CONSTRAINT PK_FxCurrencyConversionAudit PRIMARY KEY (ID)
 );

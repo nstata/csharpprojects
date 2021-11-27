@@ -49,5 +49,22 @@ namespace FxCurrencyConverterIntegrationTests
                 LastUpdated = priceDateTime
             };
         }
+
+        internal void SetLatest(string ccyPair)
+        {
+            CurrencyPriceDetails currencyPriceDetails = _currencyPriceDetails.Find(x => x.CcyPair == ccyPair);
+           _currencyPriceDetails.Remove(currencyPriceDetails);
+
+            CurrencyPriceDetails currencyPriceDetails2 = new CurrencyPriceDetails
+            {
+                CcyPair = currencyPriceDetails.CcyPair,
+                BidPx = currencyPriceDetails.BidPx,
+                AskPx = currencyPriceDetails.AskPx,
+                PriceState = currencyPriceDetails.PriceState,
+                LastUpdated = DateTime.Now
+            };
+
+            _currencyPriceDetails.Add(currencyPriceDetails2);
+        }
     }
 }
