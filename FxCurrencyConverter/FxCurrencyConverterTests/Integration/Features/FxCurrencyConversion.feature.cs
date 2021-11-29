@@ -451,7 +451,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("our input is:", ((string)(null)), table7, "And ");
 #line hidden
 #line 66
- testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("we run the calculation with latest market price", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
@@ -888,7 +888,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.And("our input is:", ((string)(null)), table16, "And ");
 #line hidden
 #line 138
- testRunner.When("we run the calculation", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("we run the calculation with latest market price", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",

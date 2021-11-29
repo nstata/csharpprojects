@@ -1,11 +1,9 @@
 using FxCurrencyConverter.Enums;
-using System;
 
 namespace FxCurrencyConverter.CurrencyConverter
 {
     public class CurrencyConversionResponse : CurrencyConversionRequest
     {
-        public Guid Id { get; init; }
         public string OriginalAmountCcy { get; init; }
 
         public string ConvertedAmountCcy { get; init; }

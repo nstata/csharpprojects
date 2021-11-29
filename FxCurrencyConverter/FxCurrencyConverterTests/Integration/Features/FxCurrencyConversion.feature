@@ -63,7 +63,7 @@ Scenario: When the CurrencyPair entered is all lowercase or mix of uppercase and
 	| 3  | GBP/Usd      | Buy  | 100    | 216ed28e-3b3f-41e5-a4f1-9e3bba3afa1d |
 	| 4  | gbp/USD      | Buy  | 100    | c42bd0bb-ca71-49bb-be0c-a2d316c89399 |
 	
-	When we run the calculation
+	When we run the calculation with latest market price
 
 	Then the expected results should be
 	| Id | ConversionResult | ConvertedAmountCurrency | ConvertedAmount | PxUsed  | CcyPair | OriginalAmount | OriginalAmountCcy | Side | Guid                                 |
@@ -135,9 +135,7 @@ Scenario: When using a valid Currency pair, market is open and price is latest, 
 	| 1  | GBP/USD      | Buy  | 100    | 69233754-a113-4355-a1b0-4026bbbf635a |
 	| 2  | GBP/USD      | Sell | 100    | 9df429e9-5d73-4330-9f14-72908db4a13a |
 	
-	And the market price is latest for all currencies
-
-	When we run the calculation
+	When we run the calculation with latest market price
 
 	Then the expected results should be
 	| Id | ConversionResult | ConvertedAmountCurrency | ConvertedAmount | PxUsed  | CcyPair | OriginalAmount | OriginalAmountCcy | Side | Guid                                 |

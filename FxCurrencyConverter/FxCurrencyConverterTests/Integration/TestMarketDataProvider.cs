@@ -8,32 +8,38 @@ namespace FxCurrencyConverterIntegrationTests
 {
     public class TestMarketDataProvider : IDataProvider
     {
-        private List<CurrencyPriceDetails> _currencyPriceDetails;
+        //private List<CurrencyPriceDetails> _currencyPriceDetails;
+        private Dictionary<string, CurrencyPriceDetails> _currencyPriceDetails;
 
         public TestMarketDataProvider()
         {
             DateTime now = DateTime.Now;
             DateTime staleTime = now.AddMilliseconds(-15);
 
-            _currencyPriceDetails = new List<CurrencyPriceDetails>()
+            _currencyPriceDetails = new Dictionary<string, CurrencyPriceDetails>()
             {
-                GetCurrencyPriceDetail("AUD/CAD",0.91946m,0.9207m, now, MarketPriceStateEnum.MarketClosed),
-                GetCurrencyPriceDetail("AUD/USD",0.73273m,0.73334m, staleTime),
-                GetCurrencyPriceDetail("EUR/CHF",1.0538m,1.055m, now),
-                GetCurrencyPriceDetail("EUR/GBP",0.85283m,0.85357m, now),
-                GetCurrencyPriceDetail("EUR/JPY",130.296m,130.446m, now),
-                GetCurrencyPriceDetail("EUR/USD",1.1442m,1.14514m, now),
-                GetCurrencyPriceDetail("GBP/CAD",1.68345m,1.68495m, now),
-                GetCurrencyPriceDetail("GBP/USD",1.34126m,1.34272m, now),
-                GetCurrencyPriceDetail("USD/CAD",1.2545m,1.2555m, now),
-                GetCurrencyPriceDetail("USD/CHF",0.92094m,0.92204m, now),
-                GetCurrencyPriceDetail("USD/JPY",113.851m,113.932m, now),
+                {"AUD/CAD", GetCurrencyPriceDetail("AUD/CAD",0.91946m,0.9207m, now, MarketPriceStateEnum.MarketClosed) },
+                {"AUD/USD", GetCurrencyPriceDetail("AUD/USD",0.73273m,0.73334m, staleTime) },
+                {"EUR/CHF", GetCurrencyPriceDetail("EUR/CHF",1.0538m,1.055m, now) },
+                {"EUR/GBP", GetCurrencyPriceDetail("EUR/GBP",0.85283m,0.85357m, now) },
+                {"EUR/JPY", GetCurrencyPriceDetail("EUR/JPY",130.296m,130.446m, now) },
+                {"EUR/USD", GetCurrencyPriceDetail("EUR/USD",1.1442m,1.14514m, now) },
+                {"GBP/CAD", GetCurrencyPriceDetail("GBP/CAD",1.68345m,1.68495m, now) },
+                {"GBP/USD", GetCurrencyPriceDetail("GBP/USD",1.34126m,1.34272m, now) },
+                {"USD/CAD", GetCurrencyPriceDetail("USD/CAD",1.2545m,1.2555m, now) },
+                {"USD/CHF", GetCurrencyPriceDetail("USD/CHF",0.92094m,0.92204m, now) },
+                {"USD/JPY", GetCurrencyPriceDetail("USD/JPY",113.851m,113.932m, now) }
             };
         }
 
         public CurrencyPriceDetails GetCurrencyPriceDetails(string ccyPair)
         {
-            return _currencyPriceDetails.Find(x => x.CcyPair == ccyPair);
+            if (_currencyPriceDetails.TryGetValue(ccyPair, out CurrencyPriceDetails currencyPriceDetails))
+            {
+                return currencyPriceDetails;
+            }
+
+            return null;
         }
 
         private CurrencyPriceDetails GetCurrencyPriceDetail(string ccyPair, decimal bidPx, decimal askPx,
@@ -52,8 +58,7 @@ namespace FxCurrencyConverterIntegrationTests
 
         internal void SetLatest(string ccyPair)
         {
-            CurrencyPriceDetails currencyPriceDetails = _currencyPriceDetails.Find(x => x.CcyPair == ccyPair);
-           _currencyPriceDetails.Remove(currencyPriceDetails);
+            CurrencyPriceDetails currencyPriceDetails = _currencyPriceDetails[ccyPair];
 
             CurrencyPriceDetails currencyPriceDetails2 = new CurrencyPriceDetails
             {
@@ -64,7 +69,7 @@ namespace FxCurrencyConverterIntegrationTests
                 LastUpdated = DateTime.Now
             };
 
-            _currencyPriceDetails.Add(currencyPriceDetails2);
+            _currencyPriceDetails[ccyPair] = currencyPriceDetails2;
         }
     }
 }

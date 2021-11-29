@@ -1,0 +1,32 @@
+
+UserId: long   1234567
+
+User operation:
+Successful
+Duplicate
+
+
+Upon receiving request:
+ log this in DB as Pending
+
+Check for Guid in DB:
+  if Guid in DB exists:
+	Check for conversion results:
+	  if conversion results == Success:
+		duplicate request
+		log this new request in db
+		quit with appropriate respone code: DuplicateRequest
+	  if conversion results <> Success:
+		try conversion again
+
+  if Guid DOES NOT exist in DB:
+    try conversion again
+
+
+Trying conversion:
+  check for user settings
+    user active/inactive
+    user allowed trading currency pair
+	user min amount to trade
+    user available balance to trade
+	

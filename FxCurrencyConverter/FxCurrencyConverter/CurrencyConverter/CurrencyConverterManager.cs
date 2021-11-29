@@ -67,8 +67,7 @@ namespace FxCurrencyConverter.CurrencyConverter
                     };
                 }
 
-                DateTime now = DateTime.Now;
-                if ((now - ccyPriceDetails.LastUpdated).TotalMilliseconds > 10)
+                if ((DateTime.Now - ccyPriceDetails.LastUpdated).TotalMilliseconds > 10)
                 {
                     return new CurrencyConversionResponse
                     {

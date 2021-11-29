@@ -60,22 +60,32 @@ namespace FxCurrencyConverterIntegrationTests.Steps
             }
         }
 
-        [Given(@"the market price is latest for all currencies")]
-        public void GivenTheMarketPriceIsLatestForAllCurrencies()
+
+        public void SetLatestTimeForCcyPair(string ccyPair)
         {
-            foreach(TestState testState in _testStateList)
-            {
-                TestMarketDataProvider testMarketDataProvider = (TestMarketDataProvider)_dataProvider;
-                testMarketDataProvider.SetLatest(testState.CcyPair);
-            }
+            TestMarketDataProvider testMarketDataProvider = (TestMarketDataProvider)_dataProvider;
+            testMarketDataProvider.SetLatest(ccyPair);
         }
 
+
+        [When(@"we run the calculation with latest market price")]
+        public void WhenWeRunTheCalculationWithLatestMarketPrice()
+        {
+            foreach (TestState testState in _testStateList)
+            {
+                SetLatestTimeForCcyPair(testState.CcyPair.ToUpper());
+                CurrencyConversionResponse response = _currencyConverterManager.
+                    GetCurrencyConversionDetails(testState.CcyPair, testState.Side == SideEnum.Buy, testState.OriginalAmount, testState.Guid);
+
+                testState.ActualResponse = response;
+            }
+        }
 
 
         [When(@"we run the calculation")]
         public void WhenWeRunTheCalculation()
         {
-            foreach(TestState testState in _testStateList)
+            foreach (TestState testState in _testStateList)
             {
                 CurrencyConversionResponse response = _currencyConverterManager.
                     GetCurrencyConversionDetails(testState.CcyPair, testState.Side == SideEnum.Buy, testState.OriginalAmount, testState.Guid);
@@ -83,7 +93,7 @@ namespace FxCurrencyConverterIntegrationTests.Steps
                 testState.ActualResponse = response;
             }
         }
-        
+
         [Then(@"the expected results should be")]
         public void ThenTheExpectedResultsShouldBe(Table table)
         {
