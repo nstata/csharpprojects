@@ -171,7 +171,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1",
                             "100010",
                             "00000000-0000-0000-0000-000000000000",
-                            "ConversionFailedInvalidUserId",
+                            "ConversionFailedInvalidRequestId",
                             "GBP/USD",
                             "100",
                             "Buy",
