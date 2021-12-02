@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SpecFlowObsoleteCodeBehindFiles Remove="UserFxCurrencyConversion\UserFxCurrencyConversion - Copy.feature.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="SpecRun.SpecFlow" Version="3.9.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UserFxCurrencyConverter\UserFxCurrencyConverter.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="UserFxCurrencyConversion\UserFxCurrencyConversionNegative.feature.cs">
+      <DependentUpon>UserFxCurrencyConversionNegative.feature</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <SpecFlowFeatureFiles Update="UserFxCurrencyConversion\UserFxCurrencyConversionNegative.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+  </ItemGroup>
+
+</Project>
