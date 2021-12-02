@@ -8,7 +8,7 @@ GO
 CREATE TABLE Side
 (
 ID int NOT NULL,
-Description nvarchar(4) NOT NULL
+Description nvarchar(4) NOT NULL,
 CONSTRAINT PK_Side PRIMARY KEY (ID)
 );
 
@@ -16,7 +16,7 @@ CONSTRAINT PK_Side PRIMARY KEY (ID)
 CREATE TABLE ConversionResults
 (
 ID int NOT NULL,
-Description nvarchar(50) NOT NULL
+Description nvarchar(50) NOT NULL,
 CONSTRAINT PK_ConversionResults PRIMARY KEY (ID)
 );
 
@@ -35,7 +35,6 @@ ConvertedAmount DECIMAL(18, 8) NULL,
 PxUsed DECIMAL(18, 8) NULL,
 OriginalAmountCcy nvarchar(3) NULL,
 LastUpdated datetime,
-RequestStatus nvarchar(10),NOT NULL
 CONSTRAINT PK_FxCurrencyConversionAudit PRIMARY KEY (ID)
 );
 GO

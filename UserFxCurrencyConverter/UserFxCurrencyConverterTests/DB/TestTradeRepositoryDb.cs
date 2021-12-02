@@ -11,8 +11,8 @@ namespace FxCurrencyConverterIntegrationTests.DB
     public class TestTradeRepositoryDb
     {
         private readonly string _sqlConnectionStr = @"Server=(LocalDb)\MSSQLLocalDB;Database=TradeRepository;Trusted_Connection=True;";
-        private readonly string _selectSqlQuery = "select * from dbo.FxCurrencyConversionAudit t where t.ID = @id";
-        private readonly string _deleteSqlQuery = "delete dbo.FxCurrencyConversionAudit";
+        private readonly string _selectSqlQuery = "select * from dbo.UserFxCurrencyConversionAudit t where t.RequestId = @requestId AND t.UserId = @userId";
+        private readonly string _deleteSqlQuery = "delete dbo.UserFxCurrencyConversionAudit";
 
         public void CleanTable()
         {
@@ -20,13 +20,13 @@ namespace FxCurrencyConverterIntegrationTests.DB
             conn.Execute(_deleteSqlQuery);
         }
 
-        public IList<UserCurrencyConversionResponse> GetFxCurrencyConversionAudit(Guid guid)
+        public IList<UserCurrencyConversionResponse> GetFxCurrencyConversionAudit(Guid RequestId, long UserId)
         {
             using SqlConnection conn = new SqlConnection(_sqlConnectionStr);
-
             using SqlCommand cmd = new SqlCommand(_selectSqlQuery, conn);
             cmd.CommandType = CommandType.Text;
-            cmd.Parameters.Add("@id", SqlDbType.UniqueIdentifier).Value = guid;
+            cmd.Parameters.Add("@requestId", SqlDbType.UniqueIdentifier).Value = RequestId;
+            cmd.Parameters.Add("@userId", SqlDbType.BigInt).Value = UserId;
 
             conn.Open();
             using SqlDataReader reader = cmd.ExecuteReader();

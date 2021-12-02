@@ -4,7 +4,7 @@ using UserFxCurrencyConverter.Enums;
 using System.Collections.Generic;
 using System;
 
-namespace FxCurrencyConverterIntegrationTests
+namespace UserFxCurrencyConverterIntegrationTests
 {
     public class TestMarketDataProvider : IDataProvider
     {

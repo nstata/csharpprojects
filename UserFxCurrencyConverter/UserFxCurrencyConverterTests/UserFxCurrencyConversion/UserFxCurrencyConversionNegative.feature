@@ -26,12 +26,12 @@ Scenario: When a user with invalid RequestID places a request the conversion sho
 	When we run the calculation with latest market price
 
 	Then the expected results should be
-	| Id | UserId | RequestId                            | ConversionResult                 | ConvertedAmountCurrency | ConvertedAmount | PxUsed | CcyPair | OriginalAmount | OriginalAmountCcy | Side |
-	| 1  | 100010 | 00000000-0000-0000-0000-000000000000 | ConversionFailedInvalidRequestId |                         |                 |        | GBP/USD | 100            | GBP               | Buy  |
-	| 2  | 100020 | 00000000-0000-0000-0000-000000000000 | ConversionFailedInvalidRequestId |                         |                 |        | GBP/USD | 100            | GBP               | Sell |
+	| Id | UserId | RequestId                            | ConversionResult                 | CcyPair | OriginalAmount | Side | ConvertedAmountCurrency | ConvertedAmount | PxUsed | OriginalAmountCcy |
+	| 1  | 100010 | 00000000-0000-0000-0000-000000000000 | ConversionFailedInvalidUserId    | GBP/USD | 100            | Buy  |                         |                 |        |                   |
+	| 2  | 100020 | 00000000-0000-0000-0000-000000000000 | ConversionFailedInvalidRequestId | GBP/USD | 100            | Sell |                         |                 |        |                   |
 
 	And database should store
-	| Id | UserId | RequestId                            | ConversionResult                 | ConvertedAmountCurrency | ConvertedAmount | PxUsed | CcyPair | OriginalAmount | OriginalAmountCcy | Side |
-	| 1  | 100010 | 00000000-0000-0000-0000-000000000000 | ConversionFailedInvalidRequestId |                         |                 |        | GBP/USD | 100            | GBP               | Buy  |
-	| 2  | 100020 | 00000000-0000-0000-0000-000000000000 | UserInactive                     |                         |                 |        | GBP/USD | 100            | GBP               | Sell |  
+	| Id | UserId | RequestId                            | ConversionResult                 | CcyPair | OriginalAmount | Side | ConvertedAmountCurrency | ConvertedAmount | PxUsed | OriginalAmountCcy |
+	| 1  | 100010 | 00000000-0000-0000-0000-000000000000 | ConversionFailedInvalidRequestId | GBP/USD | 100            | Buy  |                         |                 |        |                   |
+	| 2  | 100020 | 00000000-0000-0000-0000-000000000000 | ConversionFailedInvalidRequestId | GBP/USD | 100            | Sell |                         |                 |        |                   |
 

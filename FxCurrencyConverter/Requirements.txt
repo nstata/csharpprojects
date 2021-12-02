@@ -9,6 +9,13 @@ Duplicate
 Upon receiving request:
  log this in DB as Pending
 
+default
+{00000000-0000-0000-0000-000000000000}
+
+userId > 0
+
+
+//duplicate:  userId + requestId
 Check for Guid in DB:
   if Guid in DB exists:
 	Check for conversion results:
@@ -25,8 +32,32 @@ Check for Guid in DB:
 
 Trying conversion:
   check for user settings
+    currency
     user active/inactive
     user allowed trading currency pair
 	user min amount to trade
+	user max amount to trade
     user available balance to trade
+
+
+response
+converted amount
+
+
+	
+media@sathyasai.org.uk  tushar gadhia
+	
+	using System;
+
+namespace UserFxCurrencyConverter
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+}
+
 	

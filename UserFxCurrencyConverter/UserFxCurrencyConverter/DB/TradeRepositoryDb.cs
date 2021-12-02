@@ -12,14 +12,14 @@ namespace UserFxCurrencyConverter.DB
 
         private readonly string _insertSql =
             @"INSERT INTO dbo.[UserFxCurrencyConversionAudit] 
-(RequestID, UserId, CcyPair, SideId, OriginalAmount, ConversionResultsId, ConvertedAmountCcy, ConvertedAmount, PxUsed, OriginalAmountCcy, LastUpdated, RequestStatus) 
+(RequestID, UserId, CcyPair, SideId, OriginalAmount, ConversionResultsId, LastUpdated) 
 VALUES 
-(@requestID, @userId, @ccyPair, @sideId, @originalAmount, @conversionResultsId, @convertedAmountCcy, @convertedAmount, @pxUsed, @originalAmountCcy, GETUTCDATE(), @requeststatus)";
+(@requestID, @userId, @ccyPair, @sideId, @originalAmount, @conversionResultsId, GETUTCDATE())";
 
         private readonly string _updateSql =
              @"UPDATE dbo.[UserFxCurrencyConversionAudit] 
 SET ConversionResultsId =  @conversionResultsId, ConvertedAmountCcy =  @convertedAmountCcy, ConvertedAmount = @convertedAmount,
-PxUsed =  @pxUsed, OriginalAmountCcy = @originalAmountCcy, LastUpdated =  GETUTCDATE(), ConversionResultsId = @conversionResultsId 
+PxUsed =  @pxUsed, OriginalAmountCcy = @originalAmountCcy, LastUpdated =  GETUTCDATE()
 WHERE RequestID = @requestID AND UserID = @userID";
 
         private readonly string _selectSql =

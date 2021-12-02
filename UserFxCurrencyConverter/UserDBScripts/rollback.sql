@@ -1,7 +1,7 @@
 USE [TradeRepository]
 GO
 
-DROP TABLE [dbo].[FxCurrencyConversionAudit];
+DROP TABLE [dbo].[UserFxCurrencyConversionAudit];
 GO
 
 DROP TABLE [dbo].[ConversionResults];

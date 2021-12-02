@@ -1,18 +1,18 @@
-﻿using UserFxCurrencyConverter.UserCurrencyConverter;
-using UserFxCurrencyConverter.DataProvider;
-using UserFxCurrencyConverter.DB;
-using UserFxCurrencyConverter.Enums;
-using FxCurrencyConverterIntegrationTests.DB;
-using UserFxCurrencyConverterIntegrationTests.State;
+﻿using FxCurrencyConverterIntegrationTests.DB;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using TechTalk.SpecFlow;
+using UserFxCurrencyConverter.DataProvider;
+using UserFxCurrencyConverter.DB;
+using UserFxCurrencyConverter.Enums;
+using UserFxCurrencyConverter.UserCurrencyConverter;
+using UserFxCurrencyConverterIntegrationTests.State;
 
-namespace FxCurrencyConverterIntegrationTests.Steps
+namespace UserFxCurrencyConverterIntegrationTests.Steps
 {
     [Binding]
-    public class FxCurrencyConversionSteps
+    public class UserFxCurrencyConversionSteps
 
     {
         private readonly IDataProvider _dataProvider;
@@ -20,7 +20,7 @@ namespace FxCurrencyConverterIntegrationTests.Steps
         private readonly List<TestState> _testStateList = new List<TestState>();
         private readonly TestTradeRepositoryDb _testTradeRepositoryDb = new TestTradeRepositoryDb();
 
-        public FxCurrencyConversionSteps()
+        public UserFxCurrencyConversionSteps()
         {
             _dataProvider = new TestMarketDataProvider();
             ITradeRepositoryDb tradeRepositoryDb = new TradeRepositoryDb();
@@ -51,12 +51,13 @@ namespace FxCurrencyConverterIntegrationTests.Steps
                 int id = int.Parse(row["Id"]);
                 Guid requestId = Guid.Parse(row["RequestId"]);
                 long userId = long.Parse(row["UserId"]);
-                string ccyPair = row["CurrencyPair"];
+                string ccyPair = row["CcyPair"];
                 UserSideEnum side = row["Side"] == "Buy" ? UserSideEnum.Buy : UserSideEnum.Sell;
                 decimal amount = decimal.Parse(row["Amount"]);
 
                 TestState testState = new TestState
                 {
+                    Id = id,
                     RequestId = requestId,
                     UserId = userId,
                     CcyPair = ccyPair,
@@ -157,7 +158,7 @@ namespace FxCurrencyConverterIntegrationTests.Steps
                 UserSideEnum expectedSide = row["Side"] == "Buy" ? UserSideEnum.Buy : UserSideEnum.Sell;
 
                 //guid response mapping
-                IList<UserCurrencyConversionResponse> actualResponseList = _testTradeRepositoryDb.GetFxCurrencyConversionAudit(expectedRequestId);
+                IList<UserCurrencyConversionResponse> actualResponseList = _testTradeRepositoryDb.GetFxCurrencyConversionAudit(expectedRequestId, expectedUserId);
 
                 Assert.IsNotNull(actualResponseList);
                 Assert.AreEqual(1, actualResponseList.Count);

@@ -111,7 +111,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "AllowedTradingCcy"});
                 table1.AddRow(new string[] {
                             "100010",
-                            "Inactive",
+                            "Active",
                             "1",
                             "1000",
                             "500",
@@ -119,7 +119,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/USD,EUR/GBP"});
                 table1.AddRow(new string[] {
                             "100020",
-                            "Inactive",
+                            "Active",
                             "10000",
                             "1000000",
                             "45000",
@@ -160,37 +160,37 @@ this.ScenarioInitialize(scenarioInfo);
                             "UserId",
                             "RequestId",
                             "ConversionResult",
+                            "CcyPair",
+                            "OriginalAmount",
+                            "Side",
                             "ConvertedAmountCurrency",
                             "ConvertedAmount",
                             "PxUsed",
-                            "CcyPair",
-                            "OriginalAmount",
-                            "OriginalAmountCcy",
-                            "Side"});
+                            "OriginalAmountCcy"});
                 table3.AddRow(new string[] {
                             "1",
                             "100010",
                             "00000000-0000-0000-0000-000000000000",
-                            "UserInactive",
-                            "",
-                            "",
-                            "",
+                            "ConversionFailedInvalidUserId",
                             "GBP/USD",
                             "100",
-                            "GBP",
-                            "Buy"});
+                            "Buy",
+                            "",
+                            "",
+                            "",
+                            ""});
                 table3.AddRow(new string[] {
                             "2",
                             "100020",
                             "00000000-0000-0000-0000-000000000000",
-                            "UserInactive",
-                            "",
-                            "",
-                            "",
+                            "ConversionFailedInvalidRequestId",
                             "GBP/USD",
                             "100",
-                            "GBP",
-                            "Sell"});
+                            "Sell",
+                            "",
+                            "",
+                            "",
+                            ""});
 #line 28
  testRunner.Then("the expected results should be", ((string)(null)), table3, "Then ");
 #line hidden
@@ -199,37 +199,37 @@ this.ScenarioInitialize(scenarioInfo);
                             "UserId",
                             "RequestId",
                             "ConversionResult",
+                            "CcyPair",
+                            "OriginalAmount",
+                            "Side",
                             "ConvertedAmountCurrency",
                             "ConvertedAmount",
                             "PxUsed",
-                            "CcyPair",
-                            "OriginalAmount",
-                            "OriginalAmountCcy",
-                            "Side"});
+                            "OriginalAmountCcy"});
                 table4.AddRow(new string[] {
                             "1",
                             "100010",
                             "00000000-0000-0000-0000-000000000000",
-                            "UserInactive",
-                            "",
-                            "",
-                            "",
+                            "ConversionFailedInvalidRequestId",
                             "GBP/USD",
                             "100",
-                            "GBP",
-                            "Buy"});
+                            "Buy",
+                            "",
+                            "",
+                            "",
+                            ""});
                 table4.AddRow(new string[] {
                             "2",
                             "100020",
                             "00000000-0000-0000-0000-000000000000",
-                            "UserInactive",
-                            "",
-                            "",
-                            "",
+                            "ConversionFailedInvalidRequestId",
                             "GBP/USD",
                             "100",
-                            "GBP",
-                            "Sell"});
+                            "Sell",
+                            "",
+                            "",
+                            "",
+                            ""});
 #line 33
  testRunner.And("database should store", ((string)(null)), table4, "And ");
 #line hidden

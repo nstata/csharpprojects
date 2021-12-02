@@ -1,0 +1,21 @@
+
+INSERT INTO dbo.[FxCurrencyConversionAudit] (ID, CcyPair, SideId, OriginalAmount, ConversionResults, ConvertedAmountCcy, ConvertedAmount, PxUsed, OriginalAmountCcy , LastUpdated) VALUES (@id, @ccyPair, @sideId, @originalAmount, @conversionResults, @convertedAmountCcy, @convertedAmount, @pxUsed, @originalAmountCcy , @lastUpdated)
+
+
+Topic: Region 3 Bal-Vikas (SSE) Zoom Meeting
+Time: Nov 30, 2021 08:30 PM London
+
+Join Zoom Meeting
+https://us02web.zoom.us/j/89220682699?pwd=MEc3WnUwK0RZTlFTbXd3c3RKVTZzZz09
+
+Meeting ID: 892 2068 2699
+Passcode: 530733
+
+
+
+Tushar Gadhia
+media@srisathyasai.org.uk
+
+https://www.youtube.com/watch?v=QP4ZHFVgd64
+
+
