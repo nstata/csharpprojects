@@ -14,5 +14,6 @@
         MarketClosed = 9,
         StalePrice = 10,
         Pending = 11,
+        UnknownError = 12,
     }
 }

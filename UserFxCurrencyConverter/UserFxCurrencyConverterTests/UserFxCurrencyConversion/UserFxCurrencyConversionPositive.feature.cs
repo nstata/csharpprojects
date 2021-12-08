@@ -99,7 +99,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  testRunner.Given("the database is clean", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table61 = new TechTalk.SpecFlow.Table(new string[] {
                             "UserId",
                             "TradingStatus",
                             "MinTradingAmt",
@@ -107,7 +107,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "CurrentBalance",
                             "UserCcy",
                             "AllowedTradingCcy"});
-                table5.AddRow(new string[] {
+                table61.AddRow(new string[] {
                             "100010",
                             "Active",
                             "1",
@@ -115,7 +115,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "500",
                             "GBP",
                             "GBP/USD,EUR/GBP"});
-                table5.AddRow(new string[] {
+                table61.AddRow(new string[] {
                             "100020",
                             "Active",
                             "10000",
@@ -124,23 +124,23 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP",
                             "GBP/USD"});
 #line 13
- testRunner.And("user has below settings:", ((string)(null)), table5, "And ");
+ testRunner.And("user has below settings:", ((string)(null)), table61, "And ");
 #line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table62 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "UserId",
                             "RequestId",
                             "CcyPair",
                             "Side",
                             "Amount"});
-                table6.AddRow(new string[] {
+                table62.AddRow(new string[] {
                             "1",
                             "100010",
                             "69233754-a113-4355-a1b0-4026bbbf635a",
                             "GBP/USD",
                             "Buy",
                             "100"});
-                table6.AddRow(new string[] {
+                table62.AddRow(new string[] {
                             "2",
                             "100020",
                             "9df429e9-5d73-4330-9f14-72908db4a13a",
@@ -148,12 +148,12 @@ this.ScenarioInitialize(scenarioInfo);
                             "Sell",
                             "100"});
 #line 20
- testRunner.And("the request received is:", ((string)(null)), table6, "And ");
+ testRunner.And("the request received is:", ((string)(null)), table62, "And ");
 #line hidden
 #line 25
  testRunner.When("we run the calculation with latest market price", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table63 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "UserId",
                             "RequestId",
@@ -165,7 +165,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "OriginalAmount",
                             "OriginalAmountCcy",
                             "Side"});
-                table7.AddRow(new string[] {
+                table63.AddRow(new string[] {
                             "1",
                             "100010",
                             "69233754-a113-4355-a1b0-4026bbbf635a",
@@ -177,7 +177,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "100",
                             "GBP",
                             "Buy"});
-                table7.AddRow(new string[] {
+                table63.AddRow(new string[] {
                             "2",
                             "100020",
                             "9df429e9-5d73-4330-9f14-72908db4a13a",
@@ -190,9 +190,9 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP",
                             "Sell"});
 #line 27
- testRunner.Then("the expected results should be", ((string)(null)), table7, "Then ");
+ testRunner.Then("the expected results should be", ((string)(null)), table63, "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table64 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "UserId",
                             "RequestId",
@@ -204,7 +204,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "OriginalAmount",
                             "OriginalAmountCcy",
                             "Side"});
-                table8.AddRow(new string[] {
+                table64.AddRow(new string[] {
                             "1",
                             "100010",
                             "69233754-a113-4355-a1b0-4026bbbf635a",
@@ -216,7 +216,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "100",
                             "GBP",
                             "Buy"});
-                table8.AddRow(new string[] {
+                table64.AddRow(new string[] {
                             "2",
                             "100020",
                             "9df429e9-5d73-4330-9f14-72908db4a13a",
@@ -229,7 +229,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP",
                             "Sell"});
 #line 32
- testRunner.And("database should store", ((string)(null)), table8, "And ");
+ testRunner.And("database should store", ((string)(null)), table64, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

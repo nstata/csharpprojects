@@ -38,16 +38,25 @@ Trying conversion:
 	user min amount to trade
 	user max amount to trade
     user available balance to trade
+----------------------------
 
+	And user has below settings:
+	| UserId | TradingStatus | MinTradingAmt | MaxTradingAmt | CurrentBalance | UserCcy | AllowedTradingCcy |
+	| 100010 | Active        | 1             | 1000          | 500            | GBP     | GBP/USD,EUR/GBP   |
+	| 100020 | Active        | 10000         | 1000000       | 45000          | GBP     | GBP/USD           |
+
+----------------------------
 
 response
 converted amount
 
+TRy checking the code, if validations are tested far down. All validations check should be checked first. 
+
 
 	
 media@sathyasai.org.uk  tushar gadhia
-	
-	using System;
+
+using System;
 
 namespace UserFxCurrencyConverter
 {
@@ -61,3 +70,15 @@ namespace UserFxCurrencyConverter
 }
 
 	
+	
+	
+Tests structure:feature files as per code flow for invalid /negative scenarios.
+Instead of putting them in one negative scenario feature file,make different files and maintain tests.
+
+code flow:: invalid settings 1st, negative scenarios
+
+1)Input data is invalid: requestId, userId, ccypair, side, amount
+2)Duplicate request check: requestId, userId
+3)check user settings: currency trade(min, max, balance, ccy approved)
+4)check market settings: Market closed, Stale price
+5)

@@ -11,6 +11,8 @@ namespace UserFxCurrencyConverterIntegrationTests.State
 
         public long UserId { get; init; }
 
+
+
         public UserCurrencyConversionResponse ActualResponse { get; set; }
     }
 }

@@ -11,8 +11,13 @@ namespace FxCurrencyConverterIntegrationTests.DB
     public class TestTradeRepositoryDb
     {
         private readonly string _sqlConnectionStr = @"Server=(LocalDb)\MSSQLLocalDB;Database=TradeRepository;Trusted_Connection=True;";
-        private readonly string _selectSqlQuery = "select * from dbo.UserFxCurrencyConversionAudit t where t.RequestId = @requestId AND t.UserId = @userId";
+        private readonly string _selectSqlQuery = "select * from dbo.UserFxCurrencyConversionAudit t where t.RequestId = @requestId AND t.UserId = @userId ORDER BY t.ID DESC";
         private readonly string _deleteSqlQuery = "delete dbo.UserFxCurrencyConversionAudit";
+        private readonly string _insertSql =
+            @"INSERT INTO dbo.[UserFxCurrencyConversionAudit] 
+(RequestID, UserId, CcyPair, SideId, OriginalAmount, ConversionResultsId, LastUpdated) 
+VALUES 
+(@requestID, @userId, @ccyPair, @sideId, @originalAmount, @conversionResultsId, GETUTCDATE())";
 
         public void CleanTable()
         {
@@ -59,6 +64,21 @@ namespace FxCurrencyConverterIntegrationTests.DB
 
             return responseList;
         }
+
+        public void InsertIntoFxCurrencyConversionAudit(Guid requestId, long userId, string ccyPair, bool isBuy, decimal amount, int conversionResultId)
+        {
+            using SqlConnection conn = new SqlConnection(_sqlConnectionStr);
+            conn.Execute(_insertSql, new
+            {
+                RequestID = requestId,
+                UserId = userId,
+                CcyPair = ccyPair,
+                SideId = isBuy ? (int)UserSideEnum.Buy : (int)UserSideEnum.Sell,
+                OriginalAmount = amount,
+                ConversionResultsId = conversionResultId
+            });
+        }
+
 
         private decimal? GetDefaultDecimal(object o)
         {

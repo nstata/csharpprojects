@@ -6,6 +6,8 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
 {
     public class UserCurrencyConversionRequest
     {
+        public long ID { get; init; }
+
         public Guid RequestId { get; init; }
 
         public long UserId { get; init; }

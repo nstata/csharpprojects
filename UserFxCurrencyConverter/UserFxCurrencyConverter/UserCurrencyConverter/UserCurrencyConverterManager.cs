@@ -1,26 +1,33 @@
 using System;
-using UserFxCurrencyConverter.DataProvider;
+using System.Collections.Generic;
 using UserFxCurrencyConverter.DB;
 using UserFxCurrencyConverter.Enums;
+using UserFxCurrencyConverter.Interfaces;
 
 namespace UserFxCurrencyConverter.UserCurrencyConverter
 {
     public class UserCurrencyConverterManager
     {
         private readonly IDataProvider _marketDataProvider;
+        private readonly IUserSettings _userSettingsProvider;
         private readonly ITradeRepositoryDb _tradeRepositoryDb;
+        private readonly List<string> _allCurrencyPairs;
 
-        public UserCurrencyConverterManager(IDataProvider marketDataProvider, ITradeRepositoryDb tradeRepositoryDb)
+        public UserCurrencyConverterManager(IDataProvider marketDataProvider, ITradeRepositoryDb tradeRepositoryDb, 
+            IUserSettings userSettingsProvider)
         {
             _marketDataProvider = marketDataProvider;
             _tradeRepositoryDb = tradeRepositoryDb;
+            _userSettingsProvider = userSettingsProvider;
+
+            _allCurrencyPairs = marketDataProvider.GetAllCurrencyPairs();
         }
 
 
-        private UserCurrencyConversionResponse ConvertCurrency(Guid requestId, long userId, string ccyPair, bool isBuy, decimal amount)
+        private UserCurrencyConversionResponse ConvertCurrency(Guid requestId, long userId, string ccyPair, bool isBuy, decimal amount, int id)
         {
             // checks for invalid data
-            UserCurrencyConversionResponse invalidData = CheckIfTheInputDataIsInvalid(requestId, userId, ccyPair, isBuy, amount);
+            UserCurrencyConversionResponse invalidData = CheckIfTheInputDataIsInvalid(requestId, userId, ccyPair, isBuy, amount, id);
             if (invalidData != null)
             {
                 return invalidData;
@@ -32,6 +39,7 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             {
                 return new UserCurrencyConversionResponse
                 {
+                    ID = id,
                     RequestId = requestId,
                     UserId = userId,
                     CcyPair = ccyPair,
@@ -39,12 +47,18 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
                     OriginalAmount = amount,
                     ConversionResults = Enums.UserConversionEnum.DuplicateRequest,
                 };
+
             }
 
 
             // check if user can trade
-
-
+            invalidData = CheckUserSettings(userId, out UserSettings userSettings);
+            if (invalidData != null)
+            {
+                return invalidData;
+            }
+            
+               
             ccyPair = ccyPair.ToUpper();
 
             string[] tokens;
@@ -68,7 +82,9 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
                 {
                     return new UserCurrencyConversionResponse
                     {
+                        ID = id,
                         RequestId = requestId,
+                        UserId = userId,
                         CcyPair = ccyPair,
                         Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
                         OriginalAmount = amount,
@@ -80,7 +96,9 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
                 {
                     return new UserCurrencyConversionResponse
                     {
+                        ID = id,
                         RequestId = requestId,
+                        UserId = userId,
                         CcyPair = ccyPair,
                         Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
                         OriginalAmount = amount,
@@ -102,7 +120,9 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
 
                 return new UserCurrencyConversionResponse
                 {
+                    ID = id,
                     RequestId = requestId,
+                    UserId = userId,
                     CcyPair = ccyPair,
                     Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
                     OriginalAmount = amount,
@@ -115,26 +135,35 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             }
 
 
-            // TODO
-            // scenario 2: intermediate conversion exists between baseCcy/quotedCcy: baseCcy/otherCcy -> otherCcy/quotedCcy
+            // TODO: scenario 2: intermediate conversion exists between baseCcy/quotedCcy: baseCcy/otherCcy -> otherCcy/quotedCcy
 
             // scenario 3: no currency pair found to convert
             return new UserCurrencyConversionResponse
             {
+                ID = id,
                 RequestId = requestId,
+                UserId = userId,
                 CcyPair = ccyPair,
                 Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
                 OriginalAmount = amount,
-                ConversionResults = Enums.UserConversionEnum.ConversionFailedInvalidCcyPair,
+                ConversionResults = UserConversionEnum.UnknownError,
             };
+        }
+
+        private UserCurrencyConversionResponse CheckUserSettings(long userId, out UserSettings userSettings)
+        {
+            userSettings = _userSettingsProvider.GetUserSettings(userId);
+
+            //TODO: fill later
+            return null;
         }
 
         public UserCurrencyConversionResponse GetCurrencyConversionDetailsForUser(Guid requestId, long userId, string ccyPair, bool isBuy, decimal amount)
         {
             // log this in DB
-            _tradeRepositoryDb.InsertIntoFxCurrencyConversionAudit(requestId, userId, ccyPair, isBuy, amount);
+            int id = _tradeRepositoryDb.InsertIntoFxCurrencyConversionAudit(requestId, userId, ccyPair, isBuy, amount);
 
-            UserCurrencyConversionResponse response = ConvertCurrency(requestId, userId, ccyPair, isBuy, amount);
+            UserCurrencyConversionResponse response = ConvertCurrency(requestId, userId, ccyPair, isBuy, amount, id);
 
             // update in DB
             _tradeRepositoryDb.UpdateFxCurrencyConversionAudit(response);
@@ -142,13 +171,15 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             return response;
         }
 
-        private UserCurrencyConversionResponse CheckIfTheInputDataIsInvalid(Guid requestId, long userId, string ccyPair, bool isBuy, decimal amount)
+        private UserCurrencyConversionResponse CheckIfTheInputDataIsInvalid(Guid requestId, long userId, string ccyPair, 
+            bool isBuy, decimal amount, int id)
         {
             // checks
-            if (ccyPair == null)
+            if (string.IsNullOrEmpty(ccyPair) || !_allCurrencyPairs.Contains(ccyPair))
             {
                 return new UserCurrencyConversionResponse
                 {
+                    ID = id,
                     RequestId = requestId,
                     UserId = userId,
                     CcyPair = ccyPair,
@@ -162,6 +193,7 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             {
                 return new UserCurrencyConversionResponse
                 {
+                    ID = id,
                     RequestId = requestId,
                     UserId = userId,
                     CcyPair = ccyPair,
@@ -175,6 +207,7 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             {
                 return new UserCurrencyConversionResponse
                 {
+                    ID = id,
                     RequestId = requestId,
                     UserId = userId,
                     CcyPair = ccyPair,
@@ -188,6 +221,7 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             {
                 return new UserCurrencyConversionResponse
                 {
+                    ID = id,
                     RequestId = requestId,
                     UserId = userId,
                     CcyPair = ccyPair,

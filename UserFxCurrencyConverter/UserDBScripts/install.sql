@@ -62,5 +62,6 @@ VALUES
 (8, 'ConversionFailedInvalidUserId'),
 (9, 'MarketClosed'),
 (10,'StalePrice'),
-(11, 'Pending');
+(11, 'Pending'),
+(12, 'UnknownError')
 GO

@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <SpecFlowObsoleteCodeBehindFiles Remove="UserFxCurrencyConversion\UserFxCurrencyConversion - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="UserFxCurrencyConversion\UserFxCurrencyConversionInvalidSettings - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="UserFxCurrencyConversion\UserFxCurrencyConversionNegative - Copy.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,13 +21,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="UserFxCurrencyConversion\UserFxCurrencyConversionNegative.feature.cs">
-      <DependentUpon>UserFxCurrencyConversionNegative.feature</DependentUpon>
+    <Compile Update="UserFxCurrencyConversion\UserFxCurrencyConversionDuplicateRequest.feature.cs">
+      <DependentUpon>UserFxCurrencyConversionDuplicateRequest.feature</DependentUpon>
+    </Compile>
+    <Compile Update="UserFxCurrencyConversion\UserFxCurrencyConversionInvalidSettings.feature.cs">
+      <DependentUpon>UserFxCurrencyConversionInvalidSettings.feature</DependentUpon>
+    </Compile>
+    <Compile Update="UserFxCurrencyConversion\UserFxCurrencyConversionUserSettings.feature.cs">
+      <DependentUpon>UserFxCurrencyConversionUserSettings.feature</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <SpecFlowFeatureFiles Update="UserFxCurrencyConversion\UserFxCurrencyConversionNegative.feature">
+    <SpecFlowFeatureFiles Update="UserFxCurrencyConversion\UserFxCurrencyConversionDuplicateRequest.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="UserFxCurrencyConversion\UserFxCurrencyConversionInvalidSettings.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="UserFxCurrencyConversion\UserFxCurrencyConversionUserSettings.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>

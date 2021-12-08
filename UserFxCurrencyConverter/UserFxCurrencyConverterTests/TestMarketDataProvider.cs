@@ -1,8 +1,9 @@
-﻿using UserFxCurrencyConverter.UserCurrencyConverter;
-using UserFxCurrencyConverter.DataProvider;
-using UserFxCurrencyConverter.Enums;
+﻿using System;
 using System.Collections.Generic;
-using System;
+using System.Linq;
+using UserFxCurrencyConverter.Enums;
+using UserFxCurrencyConverter.Interfaces;
+using UserFxCurrencyConverter.UserCurrencyConverter;
 
 namespace UserFxCurrencyConverterIntegrationTests
 {
@@ -58,6 +59,12 @@ namespace UserFxCurrencyConverterIntegrationTests
 
         internal void SetLatest(string ccyPair)
         {
+            if (_currencyPriceDetails.ContainsKey(ccyPair) == false)
+            {
+                return;
+            }
+            
+
             UserCurrencyPriceDetails currencyPriceDetails = _currencyPriceDetails[ccyPair];
 
             UserCurrencyPriceDetails currencyPriceDetails2 = new UserCurrencyPriceDetails
@@ -72,9 +79,9 @@ namespace UserFxCurrencyConverterIntegrationTests
             _currencyPriceDetails[ccyPair] = currencyPriceDetails2;
         }
 
-        UserCurrencyPriceDetails IDataProvider.GetCurrencyPriceDetails(string ccyPair)
+        public List<string> GetAllCurrencyPairs()
         {
-            throw new NotImplementedException();
+            return _currencyPriceDetails.Keys.ToList();
         }
     }
 }

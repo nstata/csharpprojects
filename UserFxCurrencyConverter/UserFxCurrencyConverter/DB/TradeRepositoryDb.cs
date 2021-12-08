@@ -14,13 +14,13 @@ namespace UserFxCurrencyConverter.DB
             @"INSERT INTO dbo.[UserFxCurrencyConversionAudit] 
 (RequestID, UserId, CcyPair, SideId, OriginalAmount, ConversionResultsId, LastUpdated) 
 VALUES 
-(@requestID, @userId, @ccyPair, @sideId, @originalAmount, @conversionResultsId, GETUTCDATE())";
+(@requestID, @userId, @ccyPair, @sideId, @originalAmount, @conversionResultsId, GETUTCDATE());
+select SCOPE_IDENTITY()";
 
         private readonly string _updateSql =
              @"UPDATE dbo.[UserFxCurrencyConversionAudit] 
 SET ConversionResultsId =  @conversionResultsId, ConvertedAmountCcy =  @convertedAmountCcy, ConvertedAmount = @convertedAmount,
-PxUsed =  @pxUsed, OriginalAmountCcy = @originalAmountCcy, LastUpdated =  GETUTCDATE()
-WHERE RequestID = @requestID AND UserID = @userID";
+PxUsed =  @pxUsed, OriginalAmountCcy = @originalAmountCcy, LastUpdated =  GETUTCDATE() WHERE ID = @id";
 
         private readonly string _selectSql =
              @"SELECT COUNT(*) FROM dbo.[UserFxCurrencyConversionAudit] t WHERE t.RequestID = @requestID AND t.UserID = @userID AND t.ConversionResultsId <> 11";
@@ -32,14 +32,14 @@ WHERE RequestID = @requestID AND UserID = @userID";
             conn.Execute(_updateSql, response);
         }
 
-        public void InsertIntoFxCurrencyConversionAudit(Guid requestId, long userId, string ccyPair, bool isBuy, decimal amount)
+        public int InsertIntoFxCurrencyConversionAudit(Guid requestId, long userId, string ccyPair, bool isBuy, decimal amount)
         {
             using SqlConnection conn = new SqlConnection(_sqlConnectionStr);
-            conn.Execute(_insertSql, new 
+            return conn.ExecuteScalar<int>(_insertSql, new 
             { 
                 RequestID = requestId,
                 UserId = userId,
-                CcyPair = ccyPair,
+                CcyPair = ccyPair == null ? "null" : ccyPair,
                 SideId = isBuy ? (int) UserSideEnum.Buy : (int) UserSideEnum.Sell,
                 OriginalAmount = amount,
                 ConversionResultsId = (int) UserConversionEnum.Pending
@@ -49,7 +49,7 @@ WHERE RequestID = @requestID AND UserID = @userID";
         public bool IsDuplicateRequest(Guid requestId, long userId)
         {
             using SqlConnection conn = new SqlConnection(_sqlConnectionStr);
-            int rowsAffected = conn.Execute(_selectSql, new
+            int rowsAffected = conn.ExecuteScalar<int>(_selectSql, new
             {
                 RequestID = requestId,
                 UserId = userId,
