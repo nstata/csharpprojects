@@ -119,10 +119,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/USD",
                             "200",
                             "Sell",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 7
  testRunner.And("we already have below rows in database:", ((string)(null)), table1, "And ");
 #line hidden
@@ -166,10 +166,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/USD",
                             "100",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 17
  testRunner.Then("the expected results should be", ((string)(null)), table3, "Then ");
 #line hidden
@@ -193,10 +193,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/USD",
                             "100",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 21
  testRunner.And("database should store", ((string)(null)), table4, "And ");
 #line hidden
@@ -256,10 +256,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/USD",
                             "200",
                             "Sell",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 32
  testRunner.And("we already have below rows in database:", ((string)(null)), table5, "And ");
 #line hidden
@@ -303,10 +303,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/USD",
                             "100",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 42
  testRunner.Then("the expected results should be", ((string)(null)), table7, "Then ");
 #line hidden
@@ -330,10 +330,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/USD",
                             "100",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 46
  testRunner.And("database should store", ((string)(null)), table8, "And ");
 #line hidden
@@ -392,13 +392,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "11",
                             "d57aadbe-b49f-48e0-b1ba-d54b91edd036",
                             "ConversionFailedInvalidCcyPair",
-                            "EUR/XXX",
+                            "EUR/GBP",
                             "123",
                             "Sell",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 56
  testRunner.And("we already have below rows in database:", ((string)(null)), table9, "And ");
 #line hidden
@@ -413,7 +413,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "1",
                             "11",
                             "d57aadbe-b49f-48e0-b1ba-d54b91edd036",
-                            "EUR/XXX",
+                            "EUR/GBP",
                             "Sell",
                             "123"});
 #line 60
@@ -439,13 +439,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "11",
                             "d57aadbe-b49f-48e0-b1ba-d54b91edd036",
                             "DuplicateRequest",
-                            "EUR/XXX",
+                            "EUR/GBP",
                             "123",
                             "Sell",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 66
  testRunner.Then("the expected results should be", ((string)(null)), table11, "Then ");
 #line hidden
@@ -466,13 +466,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "11",
                             "d57aadbe-b49f-48e0-b1ba-d54b91edd036",
                             "DuplicateRequest",
-                            "EUR/XXX",
+                            "EUR/GBP",
                             "123",
                             "Sell",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 70
  testRunner.And("database should store", ((string)(null)), table12, "And ");
 #line hidden
@@ -534,10 +534,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/CHF",
                             "10",
                             "Sell",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 80
  testRunner.And("we already have below rows in database:", ((string)(null)), table13, "And ");
 #line hidden
@@ -581,10 +581,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/CHF",
                             "10",
                             "Sell",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 90
  testRunner.Then("the expected results should be", ((string)(null)), table15, "Then ");
 #line hidden
@@ -608,10 +608,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/CHF",
                             "10",
                             "Sell",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 94
  testRunner.And("database should store", ((string)(null)), table16, "And ");
 #line hidden
@@ -673,10 +673,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/JPY",
                             "1000",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 104
  testRunner.And("we already have below rows in database:", ((string)(null)), table17, "And ");
 #line hidden
@@ -720,10 +720,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/JPY",
                             "1000",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 114
  testRunner.Then("the expected results should be", ((string)(null)), table19, "Then ");
 #line hidden
@@ -747,10 +747,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/JPY",
                             "1000",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 118
  testRunner.And("database should store", ((string)(null)), table20, "And ");
 #line hidden
@@ -812,10 +812,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 127
  testRunner.And("we already have below rows in database:", ((string)(null)), table21, "And ");
 #line hidden
@@ -859,10 +859,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 137
  testRunner.Then("the expected results should be", ((string)(null)), table23, "Then ");
 #line hidden
@@ -886,10 +886,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 141
  testRunner.And("database should store", ((string)(null)), table24, "And ");
 #line hidden
@@ -949,10 +949,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 151
  testRunner.And("we already have below rows in database:", ((string)(null)), table25, "And ");
 #line hidden
@@ -996,10 +996,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 161
  testRunner.Then("the expected results should be", ((string)(null)), table27, "Then ");
 #line hidden
@@ -1023,10 +1023,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 165
  testRunner.And("database should store", ((string)(null)), table28, "And ");
 #line hidden
@@ -1088,10 +1088,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 175
  testRunner.And("we already have below rows in database:", ((string)(null)), table29, "And ");
 #line hidden
@@ -1135,10 +1135,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 185
  testRunner.Then("the expected results should be", ((string)(null)), table31, "Then ");
 #line hidden
@@ -1162,10 +1162,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 189
  testRunner.And("database should store", ((string)(null)), table32, "And ");
 #line hidden
@@ -1227,10 +1227,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 199
  testRunner.And("we already have below rows in database:", ((string)(null)), table33, "And ");
 #line hidden
@@ -1274,10 +1274,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 209
  testRunner.Then("the expected results should be", ((string)(null)), table35, "Then ");
 #line hidden
@@ -1301,10 +1301,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 213
  testRunner.And("database should store", ((string)(null)), table36, "And ");
 #line hidden
@@ -1364,10 +1364,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 223
  testRunner.And("we already have below rows in database:", ((string)(null)), table37, "And ");
 #line hidden
@@ -1411,10 +1411,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 233
  testRunner.Then("the expected results should be", ((string)(null)), table39, "Then ");
 #line hidden
@@ -1438,10 +1438,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 237
  testRunner.And("database should store", ((string)(null)), table40, "And ");
 #line hidden
@@ -1501,10 +1501,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 247
  testRunner.And("we already have below rows in database:", ((string)(null)), table41, "And ");
 #line hidden
@@ -1548,10 +1548,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 257
  testRunner.Then("the expected results should be", ((string)(null)), table43, "Then ");
 #line hidden
@@ -1575,10 +1575,10 @@ this.ScenarioInitialize(scenarioInfo);
                             "EUR/USD",
                             "110",
                             "Buy",
+                            "null",
                             "",
                             "",
-                            "",
-                            ""});
+                            "null"});
 #line 261
  testRunner.And("database should store", ((string)(null)), table44, "And ");
 #line hidden

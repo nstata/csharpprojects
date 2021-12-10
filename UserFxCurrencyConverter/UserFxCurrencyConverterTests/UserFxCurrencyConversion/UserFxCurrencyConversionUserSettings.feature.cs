@@ -102,14 +102,17 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("the database is clean", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table65 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
                             "UserId",
                             "RequestId",
                             "TradingStatus"});
                 table65.AddRow(new string[] {
+                            "1",
                             "200",
                             "87217cb6-bad5-4759-aabd-7e72d9b41c0e",
                             "Inactive"});
                 table65.AddRow(new string[] {
+                            "2",
                             "201",
                             "75100330-532a-46e8-b063-c9810c77cb16",
                             "Inactive"});
@@ -220,9 +223,6 @@ this.ScenarioInitialize(scenarioInfo);
                             ""});
 #line 25
  testRunner.And("database should store", ((string)(null)), table68, "And ");
-#line hidden
-#line 30
- testRunner.And("user settings are not called", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

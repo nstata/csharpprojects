@@ -6,9 +6,9 @@ Scenario: When a user with Inactive Status places a request the conversion shoul
 	Given the database is clean
 
 	And user has below settings:
-	| UserId | RequestId                            | TradingStatus |
-	| 200    | 87217cb6-bad5-4759-aabd-7e72d9b41c0e | Inactive      |
-	| 201    | 75100330-532a-46e8-b063-c9810c77cb16 | Inactive      |
+	| Id | UserId | RequestId                            | TradingStatus |
+	| 1  | 200    | 87217cb6-bad5-4759-aabd-7e72d9b41c0e | Inactive      |
+	| 2  | 201    | 75100330-532a-46e8-b063-c9810c77cb16 | Inactive      |
 
 	And the request received is:
 	| Id | UserId | RequestId                            | CcyPair | Side | Amount |
@@ -27,5 +27,5 @@ Scenario: When a user with Inactive Status places a request the conversion shoul
 	| 1  | 200    | 87217cb6-bad5-4759-aabd-7e72d9b41c0e | UserInactive     | GBP/USD | 100            | Buy  |                         |                 |        |                   |
 	| 2  | 201    | 75100330-532a-46e8-b063-c9810c77cb16 | UserInactive     | GBP/USD | 100            | Sell |                         |                 |        |                   |
 
-	And user settings are not called
+	
 

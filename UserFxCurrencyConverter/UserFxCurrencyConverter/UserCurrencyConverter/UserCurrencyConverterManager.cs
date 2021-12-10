@@ -23,6 +23,27 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             _allCurrencyPairs = marketDataProvider.GetAllCurrencyPairs();
         }
 
+        private UserCurrencyConversionResponse GetUserCurrencyConversionResponse(Guid requestId, long userId, string ccyPair, 
+            bool isBuy, decimal amount, int id, UserConversionEnum conversionResults, string baseCcy = null, decimal? pxUsed = null,
+            string quotedCcy = null)
+        {
+            return new UserCurrencyConversionResponse
+            {
+                ID = id,
+                RequestId = requestId,
+                UserId = userId,
+                CcyPair = ccyPair,
+                Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
+                OriginalAmount = amount,
+                ConversionResults = conversionResults,
+
+                OriginalAmountCcy = baseCcy,
+                ConvertedAmount = amount * pxUsed,
+                ConvertedAmountCcy = quotedCcy,
+                PxUsed = pxUsed,
+            };
+        }
+
 
         private UserCurrencyConversionResponse ConvertCurrency(Guid requestId, long userId, string ccyPair, bool isBuy, decimal amount, int id)
         {
@@ -37,16 +58,7 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             bool isDuplicate = _tradeRepositoryDb.IsDuplicateRequest(requestId, userId);
             if (isDuplicate)
             {
-                return new UserCurrencyConversionResponse
-                {
-                    ID = id,
-                    RequestId = requestId,
-                    UserId = userId,
-                    CcyPair = ccyPair,
-                    Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
-                    OriginalAmount = amount,
-                    ConversionResults = Enums.UserConversionEnum.DuplicateRequest,
-                };
+                return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.DuplicateRequest);                    
 
             }
 
@@ -177,58 +189,25 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             // checks
             if (string.IsNullOrEmpty(ccyPair) || !_allCurrencyPairs.Contains(ccyPair))
             {
-                return new UserCurrencyConversionResponse
-                {
-                    ID = id,
-                    RequestId = requestId,
-                    UserId = userId,
-                    CcyPair = ccyPair,
-                    Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
-                    OriginalAmount = amount,
-                    ConversionResults = UserConversionEnum.ConversionFailedInvalidCcyPair,
-                };
+                return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.ConversionFailedInvalidCcyPair);
             }
 
             if (amount <= 0)
             {
-                return new UserCurrencyConversionResponse
-                {
-                    ID = id,
-                    RequestId = requestId,
-                    UserId = userId,
-                    CcyPair = ccyPair,
-                    Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
-                    OriginalAmount = amount,
-                    ConversionResults = UserConversionEnum.ConversionFailedInvalidAmount,
-                };
+                return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.ConversionFailedInvalidAmount);
+
             }
 
             if (requestId == Guid.Empty)
             {
-                return new UserCurrencyConversionResponse
-                {
-                    ID = id,
-                    RequestId = requestId,
-                    UserId = userId,
-                    CcyPair = ccyPair,
-                    Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
-                    OriginalAmount = amount,
-                    ConversionResults = UserConversionEnum.ConversionFailedInvalidRequestId,
-                };
+                return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.ConversionFailedInvalidRequestId);
+
             }
 
             if (userId <= 0)
             {
-                return new UserCurrencyConversionResponse
-                {
-                    ID = id,
-                    RequestId = requestId,
-                    UserId = userId,
-                    CcyPair = ccyPair,
-                    Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
-                    OriginalAmount = amount,
-                    ConversionResults = UserConversionEnum.ConversionFailedInvalidUserId,
-                };
+                return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.ConversionFailedInvalidUserId);
+
             }
 
             return null;
