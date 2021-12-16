@@ -104,18 +104,19 @@ this.ScenarioInitialize(scenarioInfo);
                 TechTalk.SpecFlow.Table table65 = new TechTalk.SpecFlow.Table(new string[] {
                             "Id",
                             "UserId",
-                            "RequestId",
-                            "TradingStatus"});
+                            "IsActive",
+                            "MinTradingAmount",
+                            "MaxTradingAmount",
+                            "AvailableBalance",
+                            "UserCcy"});
                 table65.AddRow(new string[] {
                             "1",
                             "200",
-                            "87217cb6-bad5-4759-aabd-7e72d9b41c0e",
-                            "Inactive"});
-                table65.AddRow(new string[] {
-                            "2",
-                            "201",
-                            "75100330-532a-46e8-b063-c9810c77cb16",
-                            "Inactive"});
+                            "false",
+                            "100",
+                            "10000",
+                            "4000",
+                            "GBP"});
 #line 8
  testRunner.And("user has below settings:", ((string)(null)), table65, "And ");
 #line hidden
@@ -132,13 +133,6 @@ this.ScenarioInitialize(scenarioInfo);
                             "87217cb6-bad5-4759-aabd-7e72d9b41c0e",
                             "GBP/USD",
                             "Buy",
-                            "100"});
-                table66.AddRow(new string[] {
-                            "2",
-                            "201",
-                            "75100330-532a-46e8-b063-c9810c77cb16",
-                            "GBP/USD",
-                            "Sell",
                             "100"});
 #line 13
  testRunner.And("the request received is:", ((string)(null)), table66, "And ");
@@ -170,18 +164,6 @@ this.ScenarioInitialize(scenarioInfo);
                             "",
                             "",
                             ""});
-                table67.AddRow(new string[] {
-                            "2",
-                            "201",
-                            "75100330-532a-46e8-b063-c9810c77cb16",
-                            "UserInactive",
-                            "GBP/USD",
-                            "100",
-                            "Sell",
-                            "",
-                            "",
-                            "",
-                            ""});
 #line 20
  testRunner.Then("the expected results should be", ((string)(null)), table67, "Then ");
 #line hidden
@@ -205,18 +187,6 @@ this.ScenarioInitialize(scenarioInfo);
                             "GBP/USD",
                             "100",
                             "Buy",
-                            "",
-                            "",
-                            "",
-                            ""});
-                table68.AddRow(new string[] {
-                            "2",
-                            "201",
-                            "75100330-532a-46e8-b063-c9810c77cb16",
-                            "UserInactive",
-                            "GBP/USD",
-                            "100",
-                            "Sell",
                             "",
                             "",
                             "",

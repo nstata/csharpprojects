@@ -1461,7 +1461,7 @@ this.ScenarioInitialize(scenarioInfo);
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When previous request failed due to StalePrice and the same request is received a" +
                     "gain it should be marked as Duplicate and the conversion should not succeed", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 244
- this.ScenarioInitialize(scenarioInfo);
+this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);

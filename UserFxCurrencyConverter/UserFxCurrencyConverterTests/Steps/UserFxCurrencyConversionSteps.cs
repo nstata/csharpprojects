@@ -57,22 +57,32 @@ namespace UserFxCurrencyConverterIntegrationTests.Steps
         [Given(@"user has below settings:")]
         public void GivenUserHasBelowSettings(Table table)
         {
+            TestUserSettingsProvider userSettingsProvider = _userSettingsProvider as TestUserSettingsProvider;
             foreach (TableRow row in table.Rows)
             {
                 int id = int.Parse(row["Id"]);
-                Guid requestId = Guid.Parse(row["RequestId"]);
                 long userId = long.Parse(row["UserId"]);
-                int conversionResultId = (int)Enum.Parse<UserConversionEnum>(row["ConversionResult"]);
+                bool isActive = row["IsActive"] == "true" ? true : false;
+                decimal minTradingAmount = decimal.Parse(row["MinTradingAmount"]);
+                decimal maxTradingAmount = decimal.Parse(row["MaxTradingAmount"]);
+                decimal availableBalance = decimal.Parse(row["AvailableBalance"]);
+                string userCcy = GetDefaultString(row["UserCcy"]);
 
-                TestState testState = new TestState
+                //int conversionResultId = (int)Enum.Parse<UserConversionEnum>(row["ConversionResult"]);
+
+
+                UserSettings userSettings = new UserSettings()
                 {
-                    Id = id,
-                    RequestId = requestId,
                     UserId = userId,
-                  
+                    IsActive = isActive,
+                    MinTradingAmount = minTradingAmount,
+                    MaxTradingAmount = maxTradingAmount,
+                    AvailableBalance = availableBalance,
+                    UserCcy = userCcy,
+
                 };
 
-                _testStateList.Add(testState);
+                userSettingsProvider.SetUserSettings(userId, userSettings);
             }
 
         }

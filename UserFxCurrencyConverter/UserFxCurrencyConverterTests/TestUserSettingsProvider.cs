@@ -15,9 +15,9 @@ namespace UserFxCurrencyConverterIntegrationTests
             UserSettingsCalled = new Dictionary<long, bool>();
         }
 
-        internal void SetUserSettings(long userId)
+        internal void SetUserSettings(long userId, UserSettings userSettingsDetails)
         {
-            _userSettingsDetails[userId] = null;
+            _userSettingsDetails[userId] = userSettingsDetails;
         }
 
         public UserSettings GetUserSettings(long userId)

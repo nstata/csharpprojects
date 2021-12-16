@@ -241,7 +241,7 @@ Scenario: When previous request failed due to ConversionFailedInvalidAmount and 
 	And user settings are not called
 
 
-	Scenario: When previous request failed due to StalePrice and the same request is received again it should be marked as Duplicate and the conversion should not succeed
+Scenario: When previous request failed due to StalePrice and the same request is received again it should be marked as Duplicate and the conversion should not succeed
 	Given the database is clean
 
 	And we already have below rows in database:
