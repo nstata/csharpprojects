@@ -64,7 +64,7 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
 
 
             // check if user can trade
-            invalidData = CheckUserSettings(userId, out UserSettings userSettings);
+            invalidData = CheckUserSettings( userId, out UserSettings userSettings, requestId, ccyPair, isBuy, amount, id);
             if (invalidData != null)
             {
                 return invalidData;
@@ -162,11 +162,36 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             };
         }
 
-        private UserCurrencyConversionResponse CheckUserSettings(long userId, out UserSettings userSettings)
+        private UserCurrencyConversionResponse CheckUserSettings(long userId, out UserSettings userSettings, Guid requestId, string ccyPair, bool isBuy, decimal amount, int id)
         {
             userSettings = _userSettingsProvider.GetUserSettings(userId);
 
             //TODO: fill later
+
+            if (userSettings.IsActive == false)
+            {
+                return GetUserCurrencyConversionResponse( requestId, userId, ccyPair, isBuy, amount, id,  UserConversionEnum.UserInactive);
+
+            }
+
+            if (userSettings.MinTradingAmount > amount )
+            {
+                return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.ConversionFailedIncorrectMinimumTradingAmount);
+
+            }
+
+            if (userSettings.MaxTradingAmount < amount || userSettings.MaxTradingAmount < userSettings.AvailableBalance)
+            {
+                return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.ConversionFailedIncorrectMaximumTradingAmount);
+
+            }
+
+            if (userSettings.AvailableBalance < amount || userSettings.AvailableBalance < userSettings.MinTradingAmount)
+            {
+                return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.ConversionFailedInsufficientBalance);
+
+            }
+
             return null;
         }
 
