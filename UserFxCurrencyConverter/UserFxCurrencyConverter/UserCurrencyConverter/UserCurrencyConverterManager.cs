@@ -104,30 +104,12 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             {
                 if (ccyPriceDetails.PriceState == UserMarketPriceStateEnum.MarketClosed)
                 {
-                    return new UserCurrencyConversionResponse
-                    {
-                        ID = id,
-                        RequestId = requestId,
-                        UserId = userId,
-                        CcyPair = ccyPair,
-                        Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
-                        OriginalAmount = amount,
-                        ConversionResults = UserConversionEnum.MarketClosed,
-                    };
+                    return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.DuplicateRequest);
                 }
 
                 if ((DateTime.Now - ccyPriceDetails.LastUpdated).TotalMilliseconds > 10)
                 {
-                    return new UserCurrencyConversionResponse
-                    {
-                        ID = id,
-                        RequestId = requestId,
-                        UserId = userId,
-                        CcyPair = ccyPair,
-                        Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
-                        OriginalAmount = amount,
-                        ConversionResults = UserConversionEnum.StalePrice,
-                    };
+                    return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.DuplicateRequest);
                 }
 
                 decimal pxUsed;
@@ -142,36 +124,14 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
                     pxUsed = ccyPriceDetails.BidPx;
                 }
 
-                return new UserCurrencyConversionResponse
-                {
-                    ID = id,
-                    RequestId = requestId,
-                    UserId = userId,
-                    CcyPair = ccyPair,
-                    Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
-                    OriginalAmount = amount,
-                    OriginalAmountCcy = baseCcy,
-                    ConvertedAmount = amount * pxUsed,
-                    ConvertedAmountCcy = quotedCcy,
-                    PxUsed = pxUsed,
-                    ConversionResults = Enums.UserConversionEnum.Successful,
-                };
+                return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.DuplicateRequest);
             }
 
 
             // TODO: scenario 2: intermediate conversion exists between baseCcy/quotedCcy: baseCcy/otherCcy -> otherCcy/quotedCcy
 
             // scenario 3: no currency pair found to convert
-            return new UserCurrencyConversionResponse
-            {
-                ID = id,
-                RequestId = requestId,
-                UserId = userId,
-                CcyPair = ccyPair,
-                Side = isBuy ? UserSideEnum.Buy : UserSideEnum.Sell,
-                OriginalAmount = amount,
-                ConversionResults = UserConversionEnum.UnknownError,
-            };
+            return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.DuplicateRequest);
         }
 
         private UserCurrencyConversionResponse CheckUserSettings(long userId, out UserSettings userSettings, Guid requestId, string ccyPair, bool isBuy, decimal amount, int id)

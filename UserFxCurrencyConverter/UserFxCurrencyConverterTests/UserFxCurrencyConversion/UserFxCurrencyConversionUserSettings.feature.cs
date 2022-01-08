@@ -581,6 +581,134 @@ this.ScenarioInitialize(scenarioInfo);
             }
             this.ScenarioCleanup();
         }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("When a user with an no Currency set,  places a request the conversion should not " +
+            "succeed", SourceLine=100)]
+        public virtual void WhenAUserWithAnNoCurrencySetPlacesARequestTheConversionShouldNotSucceed()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("When a user with an no Currency set,  places a request the conversion should not " +
+                    "succeed", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 101
+ this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 102
+ testRunner.Given("the database is clean", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+                TechTalk.SpecFlow.Table table81 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "UserId",
+                            "IsActive",
+                            "MinTradingAmount",
+                            "MaxTradingAmount",
+                            "AvailableBalance",
+                            "UserCcy"});
+                table81.AddRow(new string[] {
+                            "6",
+                            "700",
+                            "true",
+                            "100",
+                            "10000",
+                            "1550",
+                            ""});
+#line 104
+ testRunner.And("user has below settings:", ((string)(null)), table81, "And ");
+#line hidden
+                TechTalk.SpecFlow.Table table82 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "UserId",
+                            "RequestId",
+                            "CcyPair",
+                            "Side",
+                            "Amount"});
+                table82.AddRow(new string[] {
+                            "6",
+                            "700",
+                            "58372ea6-0dc3-4252-8457-ff67f5b43050",
+                            "GBP/USD",
+                            "Sell",
+                            "1550"});
+#line 108
+ testRunner.And("the request received is:", ((string)(null)), table82, "And ");
+#line hidden
+#line 112
+ testRunner.When("we run the calculation with latest market price", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table83 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "UserId",
+                            "RequestId",
+                            "ConversionResult",
+                            "CcyPair",
+                            "OriginalAmount",
+                            "Side",
+                            "ConvertedAmountCurrency",
+                            "ConvertedAmount",
+                            "PxUsed",
+                            "OriginalAmountCcy"});
+                table83.AddRow(new string[] {
+                            "5",
+                            "600",
+                            "58372ea6-0dc3-4252-8457-ff67f5b43050",
+                            "ConversionFailedInvalidCcyPair",
+                            "GBP/USD",
+                            "1550",
+                            "Sell",
+                            "null",
+                            "",
+                            "",
+                            "null"});
+#line 114
+ testRunner.Then("the expected results should be", ((string)(null)), table83, "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table84 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "UserId",
+                            "RequestId",
+                            "ConversionResult",
+                            "CcyPair",
+                            "OriginalAmount",
+                            "Side",
+                            "ConvertedAmountCurrency",
+                            "ConvertedAmount",
+                            "PxUsed",
+                            "OriginalAmountCcy"});
+                table84.AddRow(new string[] {
+                            "5",
+                            "600",
+                            "58372ea6-0dc3-4252-8457-ff67f5b43050",
+                            "ConversionFailedInvalidCcyPair",
+                            "GBP/USD",
+                            "1550",
+                            "Sell",
+                            "null",
+                            "",
+                            "",
+                            "null"});
+#line 118
+ testRunner.And("database should store", ((string)(null)), table84, "And ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
