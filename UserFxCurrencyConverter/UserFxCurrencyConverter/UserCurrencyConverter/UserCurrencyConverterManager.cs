@@ -23,6 +23,20 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             _allCurrencyPairs = marketDataProvider.GetAllCurrencyPairs();
         }
 
+        public UserCurrencyConversionResponse GetCurrencyConversionDetailsForUser(Guid requestId, long userId, string ccyPair, bool isBuy, decimal amount)
+        {
+            // log this in DB
+            int id = _tradeRepositoryDb.InsertIntoFxCurrencyConversionAudit(requestId, userId, ccyPair, isBuy, amount);
+
+            UserCurrencyConversionResponse response = ConvertCurrency(requestId, userId, ccyPair, isBuy, amount, id);
+
+            // update in DB
+            _tradeRepositoryDb.UpdateFxCurrencyConversionAudit(response);
+
+            return response;
+        }
+
+
         private UserCurrencyConversionResponse GetUserCurrencyConversionResponse(Guid requestId, long userId, string ccyPair, 
             bool isBuy, decimal amount, int id, UserConversionEnum conversionResults, string baseCcy = null, decimal? pxUsed = null,
             string quotedCcy = null)
@@ -47,7 +61,7 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
 
         private UserCurrencyConversionResponse ConvertCurrency(Guid requestId, long userId, string ccyPair, bool isBuy, decimal amount, int id)
         {
-            // checks for invalid data
+            // checks for invalid request
             UserCurrencyConversionResponse invalidData = CheckIfTheInputDataIsInvalid(requestId, userId, ccyPair, isBuy, amount, id);
             if (invalidData != null)
             {
@@ -59,9 +73,7 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             if (isDuplicate)
             {
                 return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.DuplicateRequest);                    
-
             }
-
 
             // check if user can trade
             invalidData = CheckUserSettings( userId, out UserSettings userSettings, requestId, ccyPair, isBuy, amount, id);
@@ -69,8 +81,7 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             {
                 return invalidData;
             }
-            
-               
+
             ccyPair = ccyPair.ToUpper();
 
             string[] tokens;
@@ -87,7 +98,8 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             // scenario 1: direct conversion exists between baseCcy/quotedCcy
             UserCurrencyPriceDetails ccyPriceDetails = _marketDataProvider.GetCurrencyPriceDetails(ccyPair);
 
-           // UserCurrencyConversionResponse response;
+
+            // UserCurrencyConversionResponse response;
             if (ccyPriceDetails != null)
             {
                 if (ccyPriceDetails.PriceState == UserMarketPriceStateEnum.MarketClosed)
@@ -171,43 +183,30 @@ namespace UserFxCurrencyConverter.UserCurrencyConverter
             if (userSettings.IsActive == false)
             {
                 return GetUserCurrencyConversionResponse( requestId, userId, ccyPair, isBuy, amount, id,  UserConversionEnum.UserInactive);
-
             }
 
             if (userSettings.MinTradingAmount > amount )
             {
                 return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.ConversionFailedIncorrectMinimumTradingAmount);
-
             }
 
             if (userSettings.MaxTradingAmount < amount || userSettings.MaxTradingAmount < userSettings.AvailableBalance)
             {
                 return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.ConversionFailedIncorrectMaximumTradingAmount);
-
             }
 
-            if (userSettings.AvailableBalance < amount || userSettings.AvailableBalance < userSettings.MinTradingAmount)
+            if ( amount > userSettings.AvailableBalance)
             {
                 return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.ConversionFailedInsufficientBalance);
+            }
 
+            if (!_allCurrencyPairs.Contains(userSettings.UserCcy))
+            {
+                return GetUserCurrencyConversionResponse(requestId, userId, ccyPair, isBuy, amount, id, UserConversionEnum.ConversionFailedInvalidCcyPair);
             }
 
             return null;
         }
-
-        public UserCurrencyConversionResponse GetCurrencyConversionDetailsForUser(Guid requestId, long userId, string ccyPair, bool isBuy, decimal amount)
-        {
-            // log this in DB
-            int id = _tradeRepositoryDb.InsertIntoFxCurrencyConversionAudit(requestId, userId, ccyPair, isBuy, amount);
-
-            UserCurrencyConversionResponse response = ConvertCurrency(requestId, userId, ccyPair, isBuy, amount, id);
-
-            // update in DB
-            _tradeRepositoryDb.UpdateFxCurrencyConversionAudit(response);
-
-            return response;
-        }
-
         private UserCurrencyConversionResponse CheckIfTheInputDataIsInvalid(Guid requestId, long userId, string ccyPair, 
             bool isBuy, decimal amount, int id)
         {

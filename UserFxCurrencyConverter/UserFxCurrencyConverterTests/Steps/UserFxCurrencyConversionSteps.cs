@@ -79,7 +79,6 @@ namespace UserFxCurrencyConverterIntegrationTests.Steps
                     MaxTradingAmount = maxTradingAmount,
                     AvailableBalance = availableBalance,
                     UserCcy = userCcy,
-
                 };
 
                 userSettingsProvider.SetUserSettings(userId, userSettings);
